@@ -9,13 +9,18 @@ import { resultsApi } from '@/lib/api';
 import { usePdfExport } from '@/hooks/usePdfExport';
 import { QuestionPaper as QPaperType } from '@/types';
 import { useAuthStore } from '@/store/authStore';
+import { toast } from 'sonner';
+import { useJobStore } from '@/store/jobStore';
+import { wsClient } from '@/lib/websocket';
 
 export default function ResultPage() {
   const params = useParams();
   const router = useRouter();
   const jobId = params.jobId as string;
   const user = useAuthStore((state) => state.user);
+  const jobStore = useJobStore();
   const [paper, setPaper] = useState<QPaperType | null>(null);
+  const [assignmentId, setAssignmentId] = useState<string>('');
   const [images, setImages] = useState<{data: string, mimeType: string}[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -27,6 +32,7 @@ export default function ResultPage() {
       try {
         const res = await resultsApi.get(jobId);
         setPaper(res.data.data.paper);
+        setAssignmentId(res.data.data.assignmentId);
         setImages(res.data.data.images || []);
       } catch {
         setError('Could not load the question paper. Please try again.');
@@ -38,12 +44,50 @@ export default function ResultPage() {
   }, [jobId]);
 
   const handleRegenerate = async () => {
-    if (!paper) return;
+    if (!paper || !assignmentId) return;
     try {
-      await resultsApi.regenerate(jobId, '');
-      alert('Regeneration queued! Check back in a moment.');
+      const res = await resultsApi.regenerate(jobId, assignmentId);
+      const newJobId = res.data.data.jobId;
+      jobStore.setJob(newJobId);
+
+      const toastId = toast.loading('Regenerating question paper... 0%', {
+        description: 'Connecting to AI...',
+      });
+
+      wsClient.connect(
+        newJobId,
+        (progress, message) => {
+          jobStore.setProgress(progress, message);
+          toast.loading(`Regenerating question paper... ${progress}%`, {
+            id: toastId,
+            description: message || 'This usually takes 10-30 seconds',
+          });
+        },
+        (resultId) => {
+          wsClient.disconnect();
+          jobStore.setComplete(resultId);
+          toast.success('Question paper regenerated successfully!', {
+            id: toastId,
+            description: 'Your new assignment is ready.',
+            duration: 5000,
+          });
+          router.push(`/assignments/result/${newJobId}`);
+        },
+        (error) => {
+          wsClient.disconnect();
+          jobStore.setFailed(error);
+          toast.error(`Regeneration failed`, {
+            id: toastId,
+            description: error || 'An error occurred during generation.',
+            duration: 6000,
+          });
+        }
+      );
+
+      // Navigate to dashboard while waiting so user doesn't stare at the old paper
+      router.push('/dashboard');
     } catch {
-      alert('Failed to regenerate.');
+      toast.error('Failed to regenerate. Please try again.');
     }
   };
 
