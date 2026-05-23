@@ -13,6 +13,9 @@ const QUESTION_TYPES = [
   'True/False',
   'Fill in the Blanks',
 ];
+import CustomSelect from '@/components/ui/CustomSelect';
+
+const QUESTION_TYPE_OPTIONS = QUESTION_TYPES.map(t => ({ value: t, label: t }));
 
 interface Props {
   config: QuestionTypeConfig;
@@ -31,15 +34,13 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
     <div className="bg-white md:bg-transparent rounded-[24px] md:rounded-none p-4 md:p-0 mb-4 md:mb-0 shadow-[0_2px_12px_rgba(0,0,0,0.04)] md:shadow-none flex flex-col md:grid md:grid-cols-[1fr_auto_auto_auto] gap-3 md:gap-3 md:items-center">
       {/* Type dropdown */}
       <div className="flex justify-between items-center md:contents px-1 md:px-0 mb-1 md:mb-0">
-        <select
-          value={config.type}
-          onChange={(e) => onUpdate(index, { type: e.target.value })}
-          className="form-select m-0 rounded-full md:rounded-full w-full md:w-auto bg-transparent md:bg-white border-none font-medium text-[13px] md:font-semibold text-[#171717] outline-none h-auto md:h-10 px-0 md:px-3 focus:ring-0 shadow-none md:shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
-        >
-          {QUESTION_TYPES.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
+        <div className="flex-1 w-full md:w-auto">
+          <CustomSelect
+            value={config.type}
+            options={QUESTION_TYPE_OPTIONS}
+            onChange={(val) => onUpdate(index, { type: val })}
+          />
+        </div>
 
         {/* Remove button (Mobile) */}
         <button

@@ -12,6 +12,37 @@ import { useJobStore } from '@/store/jobStore';
 import { assignmentsApi } from '@/lib/api';
 import { wsClient } from '@/lib/websocket';
 
+const SUBJECT_OPTIONS = [
+  { value: 'Mathematics', label: 'Mathematics' },
+  { value: 'Physics', label: 'Physics' },
+  { value: 'Chemistry', label: 'Chemistry' },
+  { value: 'Biology', label: 'Biology' },
+  { value: 'Science', label: 'General Science' },
+  { value: 'English', label: 'English' },
+  { value: 'History', label: 'History' },
+  { value: 'Geography', label: 'Geography' },
+  { value: 'Computer Science', label: 'Computer Science' },
+  { value: 'Economics', label: 'Economics' },
+  { value: 'Literature', label: 'Literature' },
+  { value: 'Other', label: 'Other...' }
+];
+
+const CLASS_OPTIONS = [
+  { value: '1st Grade', label: '1st Grade' },
+  { value: '2nd Grade', label: '2nd Grade' },
+  { value: '3rd Grade', label: '3rd Grade' },
+  { value: '4th Grade', label: '4th Grade' },
+  { value: '5th Grade', label: '5th Grade' },
+  { value: '6th Grade', label: '6th Grade' },
+  { value: '7th Grade', label: '7th Grade' },
+  { value: '8th Grade', label: '8th Grade' },
+  { value: '9th Grade', label: '9th Grade' },
+  { value: '10th Grade', label: '10th Grade' },
+  { value: '11th Grade', label: '11th Grade' },
+  { value: '12th Grade', label: '12th Grade' },
+  { value: 'Other', label: 'Other...' }
+];
+
 export default function CreateAssignmentPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
