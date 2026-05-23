@@ -112,7 +112,7 @@ export default function LoginPage() {
               onClick={fillDemo}
               className="relative z-10 flex items-center gap-2 bg-[#FF5623] text-white border-none rounded-xl px-4 py-2.5 text-[12px] font-bold font-heading shadow-[0_4px_12px_rgba(255,86,35,0.2)] hover:bg-[#E64A19] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(255,86,35,0.3)] transition-all duration-300 cursor-pointer whitespace-nowrap"
             >
-              Fill Details
+              Auto-Fill Form
             </button>
           </div>
 
