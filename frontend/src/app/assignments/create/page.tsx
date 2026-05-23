@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { UploadCloud, Trash2, Plus, Sparkles, ChevronDown, Check, CalendarIcon, ArrowLeft, ArrowRight, CloudUpload, Mic } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
+import CustomSelect from '@/components/ui/CustomSelect';
 import QuestionTypeRow from '@/components/create/QuestionTypeRow';
 import { toast } from 'sonner';
 import { useAssignmentStore } from '@/store/assignmentStore';
@@ -325,33 +326,20 @@ export default function CreateAssignmentPage() {
               <div>
                 <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Subject</label>
                 {!isOtherSubject ? (
-                  <select
+                  <CustomSelect
                     value={store.subject}
-                    onChange={(e) => {
-                      if (e.target.value === 'Other') {
+                    options={SUBJECT_OPTIONS}
+                    placeholder="Select Subject"
+                    hasError={!!errors.subject}
+                    onChange={(val) => {
+                      if (val === 'Other') {
                         setIsOtherSubject(true);
                         store.setField('subject', '');
                       } else {
-                        store.setField('subject', e.target.value);
+                        store.setField('subject', val);
                       }
                     }}
-                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none appearance-none cursor-pointer ${errors.subject ? 'border-red-500 border' : ''}`}
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171717' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '14px' }}
-                  >
-                    <option value="" disabled>Select</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Physics">Physics</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="Biology">Biology</option>
-                    <option value="Science">General Science</option>
-                    <option value="English">English</option>
-                    <option value="History">History</option>
-                    <option value="Geography">Geography</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Economics">Economics</option>
-                    <option value="Literature">Literature</option>
-                    <option value="Other">Other...</option>
-                  </select>
+                  />
                 ) : (
                   <div className="flex gap-2">
                     <input
@@ -387,34 +375,20 @@ export default function CreateAssignmentPage() {
               <div>
                 <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Class / Grade</label>
                 {!isOtherClass ? (
-                  <select
+                  <CustomSelect
                     value={store.className}
-                    onChange={(e) => {
-                      if (e.target.value === 'Other') {
+                    options={CLASS_OPTIONS}
+                    placeholder="Select Class"
+                    hasError={!!errors.className}
+                    onChange={(val) => {
+                      if (val === 'Other') {
                         setIsOtherClass(true);
                         store.setField('className', '');
                       } else {
-                        store.setField('className', e.target.value);
+                        store.setField('className', val);
                       }
                     }}
-                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none appearance-none cursor-pointer ${errors.className ? 'border-red-500 border' : ''}`}
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171717' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '14px' }}
-                  >
-                    <option value="" disabled>Select</option>
-                    <option value="1st Grade">1st</option>
-                    <option value="2nd Grade">2nd</option>
-                    <option value="3rd Grade">3rd</option>
-                    <option value="4th Grade">4th</option>
-                    <option value="5th Grade">5th</option>
-                    <option value="6th Grade">6th</option>
-                    <option value="7th Grade">7th</option>
-                    <option value="8th Grade">8th</option>
-                    <option value="9th Grade">9th</option>
-                    <option value="10th Grade">10th</option>
-                    <option value="11th Grade">11th</option>
-                    <option value="12th Grade">12th</option>
-                    <option value="Other">Other...</option>
-                  </select>
+                  />
                 ) : (
                   <div className="flex gap-2">
                     <input
