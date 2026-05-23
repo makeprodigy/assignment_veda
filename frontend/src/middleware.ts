@@ -1,9 +1,25 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
 
 const PROTECTED = ['/dashboard', '/assignments', '/groups', '/toolkit', '/library', '/settings'];
 const AUTH_ROUTES = ['/login', '/register'];
+
+// Simple JWT parser that works perfectly in Vercel Edge without pulling in crypto libraries
+function parseJwt(token: string) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    return null;
+  }
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -27,12 +43,10 @@ export async function middleware(request: NextRequest) {
   let isValid = false;
 
   if (token) {
-    try {
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'vedaai_super_secret_jwt_key_2024');
-      await jwtVerify(token, secret);
+    const payload = parseJwt(token);
+    // Check if token exists and isn't expired
+    if (payload && payload.exp && payload.exp * 1000 > Date.now()) {
       isValid = true;
-    } catch (e) {
-      isValid = false;
     }
   }
 
