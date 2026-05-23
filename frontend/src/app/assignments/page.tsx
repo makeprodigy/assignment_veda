@@ -322,16 +322,6 @@ export default function AssignmentsPage() {
           <Plus size={16} strokeWidth={2.5} /> Create Assignment
         </Link>
       </div>
-
-      {/* Mobile Sticky FAB */}
-      <div className="md:hidden fixed bottom-[90px] right-5 z-40">
-        <Link 
-          href="/assignments/create" 
-          className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all active:scale-95 no-underline"
-        >
-          <Plus size={24} className="text-[#FF5623]" strokeWidth={2.5} />
-        </Link>
-      </div>
     </AppLayout>
   );
 }

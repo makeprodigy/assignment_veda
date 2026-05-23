@@ -28,73 +28,88 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <>
-    <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 items-center py-2.5">
+    <div className="bg-white md:bg-transparent rounded-[20px] md:rounded-none p-4 md:p-0 mb-3 md:mb-0 shadow-[0_2px_12px_rgba(0,0,0,0.04)] md:shadow-none border border-gray-100 md:border-none flex flex-col md:grid md:grid-cols-[1fr_auto_auto_auto] gap-4 md:items-center py-2.5">
       {/* Type dropdown */}
-      <select
-        value={config.type}
-        onChange={(e) => onUpdate(index, { type: e.target.value })}
-        className="form-input form-select m-0 rounded-full"
-      >
-        {QUESTION_TYPES.map((t) => (
-          <option key={t} value={t}>{t}</option>
-        ))}
-      </select>
+      <div className="flex justify-between items-center md:contents">
+        <select
+          value={config.type}
+          onChange={(e) => onUpdate(index, { type: e.target.value })}
+          className="form-input form-select m-0 rounded-full w-full md:w-auto bg-[#F5F5F5] md:bg-white border-none font-semibold text-[13px] text-[#171717] outline-none"
+        >
+          {QUESTION_TYPES.map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
 
-      {/* Remove button */}
-      <button
-        onClick={() => onRemove(index)}
-        className="bg-transparent border-none cursor-pointer text-[var(--color-text-muted)] flex items-center p-1.5 rounded transition-colors duration-200 hover:bg-red-100"
-      >
-        <X size={16} />
-      </button>
-
-      {/* Count control */}
-      <div>
-        <div className="counter-control rounded-full">
-          <button className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => onUpdate(index, { count: Math.max(1, config.count - 1) })}>−</button>
-          <input
-            type="number"
-            className="hide-spin-button w-8 text-center border-none outline-none text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
-            min="1"
-            value={config.count === 0 ? '' : config.count}
-            onChange={(e) => {
-              if (e.target.value === '') {
-                onUpdate(index, { count: 0 });
-              } else {
-                const parsed = parseInt(e.target.value);
-                if (!isNaN(parsed)) onUpdate(index, { count: parsed });
-              }
-            }}
-            onBlur={() => {
-              if (!config.count || config.count < 1) onUpdate(index, { count: 1 });
-            }}
-          />
-          <button className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => onUpdate(index, { count: config.count + 1 })}>+</button>
-        </div>
+        {/* Remove button (Mobile) */}
+        <button
+          onClick={() => onRemove(index)}
+          className="md:hidden ml-3 bg-transparent border-none cursor-pointer text-[#171717] flex items-center justify-center p-1"
+        >
+          <X size={18} strokeWidth={2} />
+        </button>
       </div>
 
-      {/* Marks control */}
-      <div>
-        <div className="counter-control rounded-full">
-          <button className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => onUpdate(index, { marks: Math.max(1, config.marks - 1) })}>−</button>
-          <input
-            type="number"
-            className="hide-spin-button w-8 text-center border-none outline-none text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
-            min="1"
-            value={config.marks === 0 ? '' : config.marks}
-            onChange={(e) => {
-              if (e.target.value === '') {
-                onUpdate(index, { marks: 0 });
-              } else {
-                const parsed = parseInt(e.target.value);
-                if (!isNaN(parsed)) onUpdate(index, { marks: parsed });
-              }
-            }}
-            onBlur={() => {
-              if (!config.marks || config.marks < 1) onUpdate(index, { marks: 1 });
-            }}
-          />
-          <button className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => onUpdate(index, { marks: config.marks + 1 })}>+</button>
+      {/* Remove button (Desktop) */}
+      <button
+        onClick={() => onRemove(index)}
+        className="hidden md:flex bg-transparent border-none cursor-pointer text-[#A3A3A3] items-center justify-center p-1.5 rounded transition-colors duration-200 hover:text-red-500 hover:bg-red-50"
+      >
+        <X size={18} strokeWidth={2} />
+      </button>
+
+      {/* Counters Row */}
+      <div className="flex gap-4 md:contents">
+        {/* Count control */}
+        <div className="flex-1 md:flex-initial">
+          <label className="block md:hidden text-[12px] font-semibold text-[#171717] mb-2 pl-2">No. of Questions</label>
+          <div className="counter-control rounded-full w-full justify-between bg-[#F5F5F5] md:bg-white border-none h-10 px-3">
+            <button className="counter-btn w-6 h-6 text-lg flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { count: Math.max(1, config.count - 1) })}>−</button>
+            <input
+              type="number"
+              className="hide-spin-button w-8 text-center border-none outline-none text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
+              min="1"
+              value={config.count === 0 ? '' : config.count}
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  onUpdate(index, { count: 0 });
+                } else {
+                  const parsed = parseInt(e.target.value);
+                  if (!isNaN(parsed)) onUpdate(index, { count: parsed });
+                }
+              }}
+              onBlur={() => {
+                if (!config.count || config.count < 1) onUpdate(index, { count: 1 });
+              }}
+            />
+            <button className="counter-btn w-6 h-6 text-lg flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { count: config.count + 1 })}>+</button>
+          </div>
+        </div>
+
+        {/* Marks control */}
+        <div className="flex-1 md:flex-initial">
+          <label className="block md:hidden text-[12px] font-semibold text-[#171717] mb-2 pl-2">Marks</label>
+          <div className="counter-control rounded-full w-full justify-between bg-[#F5F5F5] md:bg-white border-none h-10 px-3">
+            <button className="counter-btn w-6 h-6 text-lg flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { marks: Math.max(1, config.marks - 1) })}>−</button>
+            <input
+              type="number"
+              className="hide-spin-button w-8 text-center border-none outline-none text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
+              min="1"
+              value={config.marks === 0 ? '' : config.marks}
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  onUpdate(index, { marks: 0 });
+                } else {
+                  const parsed = parseInt(e.target.value);
+                  if (!isNaN(parsed)) onUpdate(index, { marks: parsed });
+                }
+              }}
+              onBlur={() => {
+                if (!config.marks || config.marks < 1) onUpdate(index, { marks: 1 });
+              }}
+            />
+            <button className="counter-btn w-6 h-6 text-lg flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { marks: config.marks + 1 })}>+</button>
+          </div>
         </div>
       </div>
     </div>
