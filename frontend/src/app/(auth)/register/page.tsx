@@ -170,37 +170,34 @@ export default function RegisterPage() {
               />
             </div>
 
-            {role === 'teacher' && (
-              <>
-                <div className="auth-divider">
-                  <div className="auth-divider-line"></div>
-                  <span className="auth-divider-text">Optional School Info</span>
-                  <div className="auth-divider-line"></div>
-                </div>
+            <div className="auth-divider">
+              <div className="auth-divider-line"></div>
+              <span className="auth-divider-text">Optional School Info</span>
+              <div className="auth-divider-line"></div>
+            </div>
 
-                <div className="auth-input-group">
-                  <label className="auth-label">School Name</label>
-                  <input
-                    type="text"
-                    value={schoolName}
-                    onChange={(e) => setSchoolName(e.target.value)}
-                    placeholder="Springfield High School"
-                    className="auth-input"
-                  />
-                </div>
+            <div className="auth-input-group">
+              <label className="auth-label">School Name</label>
+              <input
+                type="text"
+                value={schoolName}
+                onChange={(e) => setSchoolName(e.target.value)}
+                placeholder="Springfield High School"
+                className="auth-input"
+              />
+            </div>
 
-                <div className="auth-input-group">
-                  <label className="auth-label">School Location</label>
-                  <input
-                    type="text"
-                    value={schoolLocation}
-                    onChange={(e) => setSchoolLocation(e.target.value)}
-                    placeholder="City, State"
-                    className="auth-input"
-                  />
-                </div>
-              </>
-            )}
+            <div className="auth-input-group">
+              <label className="auth-label">School Location</label>
+              <input
+                type="text"
+                value={schoolLocation}
+                onChange={(e) => setSchoolLocation(e.target.value)}
+                placeholder="City, State"
+                className="auth-input"
+              />
+            </div>
+
 
             <button
               type="submit"
