@@ -1,0 +1,227 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { authApi } from '@/lib/api';
+import { useAuthStore } from '@/store/authStore';
+import type { UserRole } from '@/types';
+
+export default function RegisterPage() {
+  const router = useRouter();
+  const setUser = useAuthStore((s) => s.setUser);
+
+  const [role, setRole] = useState<UserRole>('teacher');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [schoolName, setSchoolName] = useState('');
+  const [schoolLocation, setSchoolLocation] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await authApi.register({
+        name,
+        email,
+        password,
+        role,
+        schoolName,
+        schoolLocation,
+      });
+      const { user } = response.data.data;
+      setUser(user);
+      router.replace('/dashboard');
+    } catch (err: unknown) {
+      const axiosErr = err as { response?: { data?: { message?: string } } };
+      setError(
+        axiosErr.response?.data?.message ?? 'Registration failed. Please try again.',
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="auth-layout">
+      {/* Left Panel */}
+      <div className="auth-left">
+        <div className="auth-orb-1"></div>
+        <div className="auth-orb-2"></div>
+        
+        <div className="auth-left-content">
+          <div className="auth-left-logo-row">
+            <div className="auth-logo-box">V</div>
+            <span className="auth-left-logo-text">VedaAI</span>
+          </div>
+          
+          <div>
+            <div className="auth-left-hero-bar"></div>
+            <h2 className="auth-left-hero-title">
+              Join the future<br/>of education.
+            </h2>
+            <p className="auth-left-hero-desc">
+              Create an account in seconds and experience the most powerful AI toolkit designed exclusively for educators.
+            </p>
+          </div>
+          
+          <div className="auth-left-social">
+            <div className="auth-avatar-group">
+              <div className="auth-avatar" style={{ background: '#1A1A1A' }}>JD</div>
+              <div className="auth-avatar" style={{ background: '#FF5623' }}>AS</div>
+              <div className="auth-avatar" style={{ background: '#2A2A2A' }}>+1k</div>
+            </div>
+            <div style={{ color: '#808080', fontSize: '14px', fontWeight: 500 }}>
+              Join thousands of educators
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Panel - Form */}
+      <div className="auth-right">
+        <div className="auth-form-container" style={{ padding: '20px 0' }}>
+          
+          <div style={{ marginBottom: '16px' }}>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '24px', color: '#171717', marginBottom: '4px', letterSpacing: '-0.5px' }}>
+              Create an account
+            </h1>
+            <p style={{ color: '#666666', fontSize: '13px' }}>Get started with VedaAI for free.</p>
+          </div>
+
+          {/* Role toggle */}
+          <div className="auth-role-toggle">
+            {(['teacher', 'student'] as UserRole[]).map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => setRole(r)}
+                className={`auth-role-btn ${role === r ? 'active' : ''}`}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="auth-error">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ flexShrink: 0, marginTop: '2px' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p style={{ margin: 0, lineHeight: 1.5 }}>{error}</p>
+            </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit}>
+            <div className="auth-input-group">
+              <label className="auth-label">Full Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Jane Smith"
+                required
+                className="auth-input"
+              />
+            </div>
+
+            <div className="auth-input-group">
+              <label className="auth-label">Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="name@school.edu"
+                required
+                className="auth-input"
+              />
+            </div>
+
+            <div className="auth-input-group">
+              <label className="auth-label">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength={8}
+                className="auth-input"
+                style={{ letterSpacing: '2px' }}
+              />
+            </div>
+
+            {role === 'teacher' && (
+              <>
+                <div className="auth-divider">
+                  <div className="auth-divider-line"></div>
+                  <span className="auth-divider-text">Optional School Info</span>
+                  <div className="auth-divider-line"></div>
+                </div>
+
+                <div className="auth-input-group">
+                  <label className="auth-label">School Name</label>
+                  <input
+                    type="text"
+                    value={schoolName}
+                    onChange={(e) => setSchoolName(e.target.value)}
+                    placeholder="Springfield High School"
+                    className="auth-input"
+                  />
+                </div>
+
+                <div className="auth-input-group">
+                  <label className="auth-label">School Location</label>
+                  <input
+                    type="text"
+                    value={schoolLocation}
+                    onChange={(e) => setSchoolLocation(e.target.value)}
+                    placeholder="City, State"
+                    className="auth-input"
+                  />
+                </div>
+              </>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="auth-btn"
+            >
+              {isLoading ? (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ width: '18px', height: '18px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                  Creating account...
+                </span>
+              ) : (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  Create Account
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              )}
+            </button>
+          </form>
+
+          {/* Login link */}
+          <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #EAEAEA', textAlign: 'center' }}>
+            <p style={{ color: '#666666', fontSize: '13px' }}>
+              Already have an account?{' '}
+              <Link href="/login" className="auth-link">
+                Sign in here
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
