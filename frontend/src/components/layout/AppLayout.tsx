@@ -41,6 +41,13 @@ export default function AppLayout({
         <div className="flex-1 overflow-y-auto px-4 pb-[90px] md:pb-4 pt-[80px]">
           {children}
         </div>
+        
+        {/* Gradual blur effect at the bottom for mobile */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 h-[100px] pointer-events-none z-30">
+          <div className="absolute inset-0 backdrop-blur-[8px] [mask-image:linear-gradient(to_bottom,transparent,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_100%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] to-transparent opacity-90" />
+        </div>
+
         <MobileTabBar />
         
         {/* Global Mobile Sticky FAB */}
