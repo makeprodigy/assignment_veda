@@ -29,7 +29,7 @@ export function usePdfExport(): UsePdfExport {
         margin:       [0.5, 0.5, 0.5, 0.5] as [number, number, number, number],
         filename:     `vedaai-paper-${jobId}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        html2canvas:  { scale: 2, useCORS: true, logging: false, windowWidth: 1024 },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
 
