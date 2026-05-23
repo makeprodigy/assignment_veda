@@ -295,7 +295,7 @@ export default function AssignmentsPage() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-24">
           {filtered.map((a) => (
             <AssignmentCard
               key={a._id}
