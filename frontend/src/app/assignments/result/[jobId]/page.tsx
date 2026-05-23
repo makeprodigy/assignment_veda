@@ -90,14 +90,24 @@ export default function ResultPage() {
             <p className="text-white font-bricolage font-bold text-[18px] leading-snug tracking-tight">
               Certainly, {user?.name?.split(' ')[0] || 'Teacher'}! Here is your customized Question Paper for {paper.className} {paper.subject} classes on the requested chapters:
             </p>
-            <button
-              onClick={() => downloadPdf(jobId)}
-              disabled={isDownloading}
-              className="mt-6 px-6 py-2.5 rounded-full font-inter font-semibold text-[13px] transition-colors flex items-center gap-2 bg-white text-[#171717] hover:bg-gray-100 disabled:opacity-50 cursor-pointer border-none shadow-sm w-fit"
-            >
-              <Download size={16} strokeWidth={2.5} />
-              {isDownloading ? 'Downloading...' : 'Download as PDF'}
-            </button>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => downloadPdf(jobId)}
+                disabled={isDownloading}
+                className="px-6 py-2.5 rounded-full font-inter font-semibold text-[13px] transition-colors flex items-center gap-2 bg-white text-[#171717] hover:bg-gray-100 disabled:opacity-50 cursor-pointer border-none shadow-sm w-fit"
+              >
+                <Download size={16} strokeWidth={2.5} />
+                {isDownloading ? 'Downloading...' : 'Download as PDF'}
+              </button>
+
+              <button
+                onClick={handleRegenerate}
+                className="px-6 py-2.5 rounded-full font-inter font-semibold text-[13px] transition-colors flex items-center gap-2 bg-transparent border border-white/20 text-white hover:bg-white/10 cursor-pointer w-fit"
+              >
+                <RefreshCw size={16} strokeWidth={2.5} />
+                Regenerate
+              </button>
+            </div>
           </div>
 
           {/* Question Paper (Full Width Style) */}
