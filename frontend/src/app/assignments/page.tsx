@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { Plus, Search, Filter, MoreVertical, ChevronDown, Check, Database, Trash2 } from 'lucide-react';
+import { Plus, Search, Filter, MoreVertical, ChevronDown, Check, Database, Trash2, ArrowLeft } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import ZeroState from '@/components/dashboard/ZeroState';
 import { assignmentsApi } from '@/lib/api';
@@ -179,8 +179,16 @@ export default function AssignmentsPage() {
   return (
     <AppLayout title="Assignments">
       <div className="py-4 relative">
-        {/* Header */}
-        <div className="mb-3 flex justify-between items-start">
+        {/* Mobile Page Header */}
+        <div className="flex md:hidden items-center justify-between mb-6 mt-2 relative">
+          <button onClick={() => router.back()} className="absolute left-0 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
+            <ArrowLeft size={16} className="text-[#171717]" />
+          </button>
+          <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Assignments</h1>
+        </div>
+
+        {/* Desktop Header */}
+        <div className="hidden md:flex mb-3 justify-between items-start">
           <div>
             <div className="flex items-center gap-2 mb-0.5">
               <div className="w-2 h-2 rounded-full bg-[#22c55e]" />
@@ -209,12 +217,12 @@ export default function AssignmentsPage() {
         </div>
 
         {/* Filter + Search Bar */}
-        <div className="flex items-center justify-between mb-4 bg-white rounded-xl border border-[#F0F0F0] shadow-[0_1px_3px_rgba(0,0,0,0.03)] px-3 py-2">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 mb-4 bg-white rounded-xl border border-[#F0F0F0] shadow-[0_1px_3px_rgba(0,0,0,0.03)] p-3 sm:px-3 sm:py-2">
           
           <div className="relative" ref={filterRef}>
             <button 
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={`flex items-center gap-2 border-none font-body text-[13px] font-medium cursor-pointer transition-colors duration-200 px-3 py-2 -ml-2 rounded-lg ${isFilterOpen ? 'text-[#5D5D5D] bg-[#F5F5F5]' : 'bg-transparent text-[#8A8A8A] hover:text-[#5D5D5D] hover:bg-[#F9F9F9]'}`}
+              className={`flex items-center justify-center w-full sm:w-auto gap-2 border border-gray-100 sm:border-none font-body text-[13px] font-medium cursor-pointer transition-colors duration-200 px-3 py-2 sm:-ml-2 rounded-lg ${isFilterOpen ? 'text-[#5D5D5D] bg-[#F5F5F5]' : 'bg-white sm:bg-transparent text-[#8A8A8A] hover:text-[#5D5D5D] hover:bg-[#F9F9F9]'}`}
             >
               <Filter size={16} strokeWidth={2} /> Filter By
             </button>
@@ -273,7 +281,7 @@ export default function AssignmentsPage() {
             )}
           </div>
 
-          <div className="relative w-[320px]">
+          <div className="relative w-full sm:w-[320px]">
             <div className="flex items-center rounded-full border border-[#E5E5E5] bg-white px-3 py-2 focus-within:border-[#D84315] focus-within:ring-1 focus-within:ring-[#D84315] transition-all">
               <Search size={15} className="text-[#A3A3A3] shrink-0" />
               <input
@@ -287,7 +295,7 @@ export default function AssignmentsPage() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 gap-3 pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pb-24">
           {filtered.map((a) => (
             <AssignmentCard
               key={a._id}
@@ -299,14 +307,12 @@ export default function AssignmentsPage() {
         </div>
       </div>
 
-      {/* Gradual Blur Fade and Sticky Create Button */}
+      {/* Desktop Sticky Create Button */}
       <div 
-        className="fixed bottom-0 right-0 h-[12rem] pointer-events-none z-30 flex items-end justify-center pb-8"
+        className="hidden md:flex fixed bottom-0 right-0 h-[12rem] pointer-events-none z-30 items-end justify-center pb-8"
         style={{ left: 'calc(var(--sidebar-width) + 16px)' }}
       >
-        {/* Smooth frosted glass blur that fades in towards the bottom */}
         <div className="absolute inset-0 backdrop-blur-[12px] [mask-image:linear-gradient(to_bottom,transparent,black_75%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_75%)]" />
-        {/* Subtle gradient to blend seamlessly into the page background */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-transparent opacity-80" />
         
         <Link 
@@ -314,6 +320,16 @@ export default function AssignmentsPage() {
           className="relative pointer-events-auto flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full font-heading text-[14px] font-bold no-underline shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-all hover:-translate-y-0.5 hover:bg-[#FF5623] hover:shadow-[0_12px_28px_rgba(255,86,35,0.25)]"
         >
           <Plus size={16} strokeWidth={2.5} /> Create Assignment
+        </Link>
+      </div>
+
+      {/* Mobile Sticky FAB */}
+      <div className="md:hidden fixed bottom-[90px] right-5 z-40">
+        <Link 
+          href="/assignments/create" 
+          className="flex items-center justify-center w-[52px] h-[52px] rounded-full bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all active:scale-95 no-underline"
+        >
+          <Plus size={24} className="text-[#FF5623]" strokeWidth={2.5} />
         </Link>
       </div>
     </AppLayout>

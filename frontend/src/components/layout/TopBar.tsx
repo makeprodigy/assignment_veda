@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeft, LayoutGrid, Bell, ChevronDown, LogOut, User } from 'lucide-react';
+import { ArrowLeft, LayoutGrid, Bell, ChevronDown, LogOut, User, Menu } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -25,28 +25,41 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
     : 'U';
 
   return (
-    <header className="flex items-center justify-between px-5 py-2 z-10 shrink-0 border border-white/30 bg-white/80 backdrop-blur-md rounded-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.03)]">
-      {/* Left: back + breadcrumb */}
+    <header className="flex items-center justify-between px-3 md:px-5 py-2 md:py-2 z-10 shrink-0 border border-white/30 bg-white/80 backdrop-blur-md rounded-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.03)]">
+      {/* Left: Mobile Logo & Desktop Breadcrumb */}
       <div className="flex items-center gap-3">
-        {showBackButton && (
-          <button
-            onClick={() => backHref ? router.push(backHref) : router.back()}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-sm cursor-pointer border border-gray-100"
-            aria-label="Go back"
-          >
-            <ArrowLeft size={18} className="text-[#171717]" />
-          </button>
-        )}
+        {/* Mobile Logo */}
+        <div className="flex md:hidden items-center gap-2">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#E65023] to-[#C93B12] flex-shrink-0 shadow-sm">
+            <span className="text-white font-extrabold text-sm font-bricolage leading-none">V</span>
+          </div>
+          <span className="font-bricolage font-extrabold text-[17px] text-[#111827] tracking-tight">
+            VedaAI
+          </span>
+        </div>
 
-        <div className="flex items-center gap-3 ml-1">
-          <LayoutGrid size={18} className="text-[#9CA3AF]" strokeWidth={2} />
-          {breadcrumb && (
-            <>
-              <span className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{breadcrumb}</span>
-              <span className="text-[15px] font-semibold text-[#9CA3AF] mx-0.5">/</span>
-            </>
+        {/* Desktop Breadcrumbs */}
+        <div className="hidden md:flex items-center gap-3">
+          {showBackButton && (
+            <button
+              onClick={() => backHref ? router.push(backHref) : router.back()}
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-sm cursor-pointer border border-gray-100"
+              aria-label="Go back"
+            >
+              <ArrowLeft size={18} className="text-[#171717]" />
+            </button>
           )}
-          <h1 className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{title}</h1>
+
+          <div className="flex items-center gap-3 ml-1">
+            <LayoutGrid size={18} className="text-[#9CA3AF]" strokeWidth={2} />
+            {breadcrumb && (
+              <>
+                <span className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{breadcrumb}</span>
+                <span className="text-[15px] font-semibold text-[#9CA3AF] mx-0.5">/</span>
+              </>
+            )}
+            <h1 className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{title}</h1>
+          </div>
         </div>
       </div>
 
@@ -113,6 +126,11 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
             </div>
           )}
         </div>
+
+        {/* Mobile Hamburger Menu */}
+        <button className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] hover:bg-gray-50 transition-colors">
+          <Menu size={22} strokeWidth={2.5} />
+        </button>
       </div>
     </header>
   );

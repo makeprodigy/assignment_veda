@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Plus, Upload, Mic, CloudUpload } from 'lucide-react';
+import { Plus, Upload, Mic, CloudUpload, ArrowLeft } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import QuestionTypeRow from '@/components/create/QuestionTypeRow';
 import LoadingJob from '@/components/shared/LoadingJob';
@@ -133,9 +133,17 @@ export default function CreateAssignmentPage() {
     <AppLayout title="Create Assignment" backHref="/dashboard">
       {showLoading && <LoadingJob />}
 
-      <div className="max-w-[720px] mx-auto my-6 px-5">
+      {/* Mobile Page Header */}
+      <div className="flex md:hidden items-center justify-between mb-2 mt-2 px-4 relative">
+        <button onClick={() => router.back()} className="absolute left-4 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
+          <ArrowLeft size={16} className="text-[#171717]" />
+        </button>
+        <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Create Assignment</h1>
+      </div>
+
+      <div className="max-w-[720px] mx-auto my-4 md:my-6 px-4 sm:px-5 pb-24">
         {/* Step Indicator */}
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-4 mb-4 md:mb-6">
           <div className="flex-1 h-1.5 bg-[#171717] rounded-full" />
           <div className={`flex-1 h-1.5 rounded-full transition-colors duration-300 ${step === 2 ? 'bg-[#171717]' : 'bg-[#E5E5E5]'}`} />
         </div>

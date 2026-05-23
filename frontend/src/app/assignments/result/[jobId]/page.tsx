@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { Download, RefreshCw } from 'lucide-react';
+import { useParams, useRouter } from 'next/navigation';
+import { Download, RefreshCw, ArrowLeft } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import QuestionPaper from '@/components/output/QuestionPaper';
 import { resultsApi } from '@/lib/api';
@@ -12,6 +12,7 @@ import { useAuthStore } from '@/store/authStore';
 
 export default function ResultPage() {
   const params = useParams();
+  const router = useRouter();
   const jobId = params.jobId as string;
   const user = useAuthStore((state) => state.user);
   const [paper, setPaper] = useState<QPaperType | null>(null);
@@ -72,9 +73,17 @@ export default function ResultPage() {
 
   return (
     <AppLayout title="Assignment Output" backHref="/dashboard">
+      {/* Mobile Page Header */}
+      <div className="flex md:hidden items-center justify-between mb-2 mt-2 relative">
+        <button onClick={() => router.back()} className="absolute left-0 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
+          <ArrowLeft size={16} className="text-[#171717]" />
+        </button>
+        <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Assignment Output</h1>
+      </div>
+
       <div className="min-h-full flex flex-col pb-12">
         {/* Outer Grey Container (Width matches TopBar) */}
-        <div className="bg-[#666666] rounded-[32px] p-6 flex-1 flex flex-col gap-6 shadow-xl w-full">
+        <div className="bg-[#666666] rounded-[32px] p-4 sm:p-6 flex-1 flex flex-col gap-6 shadow-xl w-full">
           
           {/* Dark Banner Box */}
           <div className="bg-[#1F1F1F] rounded-[24px] p-6 shadow-md w-full">

@@ -109,10 +109,10 @@ export default function DashboardPage() {
               Here is what is happening with your classes today.
             </p>
           </div>
-          <div className="flex items-center gap-3 relative z-10">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto relative z-10 mt-4 sm:mt-0">
             <button 
               onClick={handleDemoToggle}
-              className={`flex items-center gap-2 py-3 px-6 rounded-full font-heading font-bold text-sm border-none cursor-pointer transition-all duration-300 hover:-translate-y-0.5 ${
+              className={`flex items-center justify-center gap-2 py-3 px-6 rounded-full font-heading font-bold text-sm border-none cursor-pointer transition-all duration-300 hover:-translate-y-0.5 ${
                 assignments.length > 0
                   ? 'bg-red-500/20 text-red-300 hover:bg-red-500/30'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -120,7 +120,7 @@ export default function DashboardPage() {
             >
               {assignments.length > 0 ? <><Trash2 size={16} /> Delete Demo Data</> : <><Database size={16} /> Load Demo Data</>}
             </button>
-            <Link href="/assignments/create" className="flex items-center gap-2 bg-white text-[#111111] py-3 px-6 rounded-full font-heading font-bold text-sm no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,255,255,0.25)] hover:bg-gray-50">
+            <Link href="/assignments/create" className="flex items-center justify-center gap-2 bg-white text-[#111111] py-3 px-6 rounded-full font-heading font-bold text-sm no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,255,255,0.25)] hover:bg-gray-50">
               <Sparkles size={16} strokeWidth={2.5} /> Create Assignment
             </Link>
           </div>
@@ -191,7 +191,7 @@ export default function DashboardPage() {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {recentAssignments.map(a => (
                 <AssignmentCard
                   key={a._id}
