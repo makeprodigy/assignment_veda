@@ -54,7 +54,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="app-sidebar bg-[#FAFAFA] shadow-[16px_0_80px_rgba(0,0,0,0.25),4px_0_24px_rgba(0,0,0,0.15)] border-none rounded-[14px]">
+    <aside className="app-sidebar bg-[#FAFAFA]/85 backdrop-blur-[12px] border border-white/50 shadow-[16px_0_80px_rgba(0,0,0,0.25),4px_0_24px_rgba(0,0,0,0.15)] rounded-[14px]">
       {/* Logo */}
       <div className="flex items-center gap-3 px-6 pt-8 pb-4">
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#E65023] to-[#C93B12] flex-shrink-0 shadow-md">

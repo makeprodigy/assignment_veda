@@ -18,7 +18,7 @@ export default function AssignmentCard({ assignment, onView, onDelete }: Assignm
       onClick={() => onView(assignment)}
     >
       <div className="flex justify-between items-start">
-        <h2 className="font-heading font-bold text-[#171717] text-[18px] leading-tight">
+        <h2 className="font-heading font-bold text-[#111827] text-[16px] tracking-tight leading-snug line-clamp-2 pr-2">
           {assignment.topic || assignment.subject}
         </h2>
         <div className="relative">
@@ -50,13 +50,19 @@ export default function AssignmentCard({ assignment, onView, onDelete }: Assignm
       </div>
       <div>
         <div className="flex justify-between items-center mt-5">
-          <span className="font-body text-[13px] text-[#8A8A8A]">
-            <strong className="font-semibold text-[#4A4A4A]">Assigned on</strong> : {format(new Date(assignment.createdAt), 'dd-MM-yyyy')}
-          </span>
-          {assignment.dueDate && (
-            <span className="font-body text-[13px] text-[#8A8A8A]">
-              <strong className="font-semibold text-[#4A4A4A]">Due</strong> : {format(new Date(assignment.dueDate), 'dd-MM-yyyy')}
+          <div className="flex flex-col gap-0.5">
+            <span className="font-inter text-[10px] font-bold uppercase tracking-widest text-[#9CA3AF]">Assigned on</span>
+            <span className="font-body text-[12px] font-medium text-[#4B5563]">
+              {format(new Date(assignment.createdAt), 'dd MMM, yyyy')}
             </span>
+          </div>
+          {assignment.dueDate && (
+            <div className="flex flex-col gap-0.5 items-end">
+              <span className="font-inter text-[10px] font-bold uppercase tracking-widest text-[#9CA3AF]">Due</span>
+              <span className="font-body text-[12px] font-medium text-[#4B5563]">
+                {format(new Date(assignment.dueDate), 'dd MMM, yyyy')}
+              </span>
+            </div>
           )}
         </div>
         {assignment.status === 'processing' && (

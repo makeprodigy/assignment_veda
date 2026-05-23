@@ -128,11 +128,11 @@ export default function DashboardPage() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D84315] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
-                <p className="font-heading text-[13px] text-[#8C8C8C] font-bold uppercase tracking-wider">Total Assignments</p>
+                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Total Assignments</p>
                 <div className="w-10 h-10 rounded-xl bg-[#FFF4F1] flex items-center justify-center border border-[#FFE0D6] group-hover:scale-110 transition-transform duration-300">
                   <FileText size={18} color="#D84315" strokeWidth={2.5} />
                 </div>
@@ -141,11 +141,11 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0EA5E9] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
-                <p className="font-heading text-[13px] text-[#8C8C8C] font-bold uppercase tracking-wider">Classes Managed</p>
+                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Classes Managed</p>
                 <div className="w-10 h-10 rounded-xl bg-[#F0F9FF] flex items-center justify-center border border-[#E0F2FE] group-hover:scale-110 transition-transform duration-300">
                   <Users size={18} color="#0EA5E9" strokeWidth={2.5} />
                 </div>
@@ -154,11 +154,11 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#EF4444] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
-                <p className="font-heading text-[13px] text-[#8C8C8C] font-bold uppercase tracking-wider">Upcoming Deadlines</p>
+                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Upcoming Deadlines</p>
                 <div className="w-10 h-10 rounded-xl bg-[#FEF2F2] flex items-center justify-center border border-[#FEE2E2] group-hover:scale-110 transition-transform duration-300">
                   <Calendar size={18} color="#EF4444" strokeWidth={2.5} />
                 </div>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
         {/* Recent Assignments */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-heading text-lg font-extrabold text-[#171717]">Recent Assignments</h2>
+            <h2 className="font-heading text-[18px] font-bold tracking-tight text-[#111827]">Recent Assignments</h2>
             <Link href="/assignments" className="flex items-center gap-1 font-body text-[13px] font-semibold text-[#D84315] no-underline hover:text-[#BF360C] transition-colors">
               View All <ArrowRight size={14} />
             </Link>

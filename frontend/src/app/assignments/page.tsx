@@ -217,7 +217,7 @@ export default function AssignmentsPage() {
         </div>
 
         {/* Filter + Search Bar */}
-        <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 mb-4 bg-white rounded-xl border border-[#F0F0F0] shadow-[0_1px_3px_rgba(0,0,0,0.03)] p-3 sm:px-3 sm:py-2">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 mb-4 bg-white/60 backdrop-blur-[24px] rounded-xl border border-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] p-3 sm:px-3 sm:py-2">
           
           <div className="relative" ref={filterRef}>
             <button 

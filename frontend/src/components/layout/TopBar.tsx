@@ -26,7 +26,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
     : 'U';
 
   return (
-    <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+    <header className="flex items-center justify-between px-4 md:px-6 py-3 md:py-1 z-10 shrink-0 bg-white/60 backdrop-blur-[24px] border border-white/80 rounded-[14px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
       {/* Left: Desktop Breadcrumbs & Mobile Logo */}
       <div className="flex items-center gap-3">
         {/* Mobile Logo */}

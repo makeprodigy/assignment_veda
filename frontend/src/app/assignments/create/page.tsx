@@ -138,33 +138,42 @@ export default function CreateAssignmentPage() {
         <button onClick={() => router.back()} className="absolute left-4 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
           <ArrowLeft size={16} className="text-[#171717]" />
         </button>
-        <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Create Assignment</h1>
+        <h1 className="w-full text-center font-heading text-[16px] font-bold text-[#111827] tracking-tight">Create Assignment</h1>
       </div>
 
       <div className="max-w-[720px] mx-auto my-4 md:my-6 px-4 sm:px-5 pb-24">
+        {/* Desktop Page Title */}
+        <div className="hidden md:block mb-6">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E] shadow-[0_0_8px_rgba(34,197,94,0.4)]"></div>
+            <h1 className="font-heading text-[16px] font-bold text-[#171717]">Create Assignment</h1>
+          </div>
+          <p className="text-[12px] text-[#A3A3A3] font-body ml-4.5">Set up a new assignment for your students</p>
+        </div>
+
         {/* Step Indicator */}
         <div className="flex items-center gap-4 mb-4 md:mb-6">
           <div className="flex-1 h-1.5 bg-[#171717] rounded-full" />
           <div className={`flex-1 h-1.5 rounded-full transition-colors duration-300 ${step === 2 ? 'bg-[#171717]' : 'bg-[#E5E5E5]'}`} />
         </div>
 
-        <div className="bg-[#F3F4F6] rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 shadow-sm">
+        <div className="bg-white/60 backdrop-blur-[24px] border border-white/80 rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 shadow-sm">
 
         {/* ─── STEP 1 ─── */}
         {step === 1 && (
           <div className="fade-in">
             <div className="mb-6">
-              <h2 className="font-heading text-xl font-bold mb-1 tracking-tight text-[#171717]">
+              <h2 className="font-heading text-[16px] font-bold mb-1 tracking-tight text-[#171717]">
                 Assignment Details
               </h2>
-              <p className="text-[#A3A3A3] text-[12px] font-medium mt-1">
-                Set up a new assignment for your students
+              <p className="font-body text-[#9CA3AF] text-[12px] font-normal leading-relaxed">
+                Basic information about your assignment
               </p>
             </div>
 
             {/* File Upload */}
             <div
-              className={`upload-zone mb-3 py-8 px-5 rounded-2xl border-2 border-dashed border-[#E5E5E5] bg-white text-center cursor-pointer ${dragOver ? 'drag-over' : ''}`}
+              className={`upload-zone mb-3 py-8 px-5 rounded-2xl border-2 border-dashed border-[#E5E5E5] bg-white/60 backdrop-blur-[24px] text-center cursor-pointer ${dragOver ? 'drag-over' : ''}`}
               onClick={() => fileInputRef.current?.click()}
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
@@ -182,11 +191,11 @@ export default function CreateAssignmentPage() {
                 <p className="font-inter font-semibold text-sm text-[#171717]">{store.uploadedFileName}</p>
               ) : (
                 <>
-                  <p className="font-inter font-semibold text-sm mb-1.5 text-[#171717]">
+                  <p className="font-inter font-semibold text-[13px] mb-1.5 text-[#171717]">
                     Choose a file or drag & drop it here
                   </p>
-                  <p className="text-[#A9A9A9] text-xs mb-4">JPEG, PNG, upto 10MB</p>
-                  <button type="button" className="bg-[#F4F4F4] border border-[#EFEFEF] rounded-full py-1.5 px-4 text-[13px] font-semibold text-[#171717] pointer-events-none">Browse Files</button>
+                  <p className="text-[#A9A9A9] text-[11px] mb-4">JPEG, PNG, upto 10MB</p>
+                  <button type="button" className="bg-[#F4F4F4] border border-[#EFEFEF] rounded-full py-1.5 px-4 text-[12px] font-medium text-[#171717] pointer-events-none">Browse Files</button>
                 </>
               )}
             </div>
@@ -194,7 +203,7 @@ export default function CreateAssignmentPage() {
 
             {/* Due Date */}
             <div className="mb-6">
-              <label className="block text-sm font-bold text-[#171717] mb-2 uppercase tracking-wider">Due Date</label>
+              <label className="block text-[12px] font-semibold text-[#171717] mb-2 font-inter">Due Date</label>
               <div className="relative">
                   <input
                   type="date"
@@ -211,10 +220,10 @@ export default function CreateAssignmentPage() {
             <div className="mb-4">
               {/* Column headers */}
               <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 pb-2">
-                <span className="font-heading text-sm font-bold text-[#171717]">Question Type</span>
+                <span className="font-heading text-[12px] font-semibold text-[#171717]">Question Type</span>
                 <span />
-                <span className="font-inter text-[13px] font-semibold text-[#171717] text-center min-w-[130px]">No. of Questions</span>
-                <span className="font-inter text-[13px] font-semibold text-[#171717] text-center min-w-[110px]">Marks</span>
+                <span className="font-inter text-[12px] font-semibold text-[#171717] text-center min-w-[130px]">No. of Questions</span>
+                <span className="font-inter text-[12px] font-semibold text-[#171717] text-center min-w-[110px]">Marks</span>
               </div>
 
               {store.questionTypes.map((qt, i) => (
@@ -234,7 +243,7 @@ export default function CreateAssignmentPage() {
               {/* Add button */}
               <button
                 onClick={store.addQuestionType}
-                className="flex items-center gap-2.5 mt-2 bg-transparent border-none cursor-pointer font-heading text-[13px] font-bold text-[#171717]"
+                className="flex items-center gap-2.5 mt-2 bg-transparent border-none cursor-pointer font-inter text-[12px] font-semibold text-[#171717]"
               >
                 <div className="w-7 h-7 rounded-full bg-[#171717] flex items-center justify-center">
                   <Plus size={16} color="white" strokeWidth={2.5} />
@@ -247,17 +256,17 @@ export default function CreateAssignmentPage() {
             <div className="flex justify-end mt-2 mb-5">
               <div className="flex flex-col items-end gap-1.5">
                 <div className="font-inter text-[12px] text-[#171717] font-medium">
-                  Total Questions : <strong className="text-[13px] font-bold">{totalQuestions}</strong>
+                  Total Questions : <strong className="font-semibold">{totalQuestions}</strong>
                 </div>
                 <div className="font-inter text-[12px] text-[#171717] font-medium">
-                  Total Marks : <strong className="text-[13px] font-bold">{totalMarks}</strong>
+                  Total Marks : <strong className="font-semibold">{totalMarks}</strong>
                 </div>
               </div>
             </div>
 
             {/* Additional Info */}
             <div className="mb-8">
-              <label className="block text-sm font-bold text-[#171717] mb-2 uppercase tracking-wider">Additional Information <span className="text-[#171717] font-bold">(For better output)</span></label>
+              <label className="block text-[12px] font-semibold text-[#171717] mb-2 font-inter">Additional Information (For better output)</label>
               <div className="relative">
                 <textarea
                   value={store.additionalInfo}
@@ -282,10 +291,10 @@ export default function CreateAssignmentPage() {
         {step === 2 && (
           <div className="fade-in">
             <div className="mb-6">
-              <h2 className="font-heading text-xl font-bold mb-1 tracking-tight text-[#171717]">
+              <h2 className="font-heading text-[16px] font-bold mb-1 tracking-tight text-[#171717]">
                 Additional Details
               </h2>
-              <p className="text-[#A3A3A3] text-[12px] font-medium mt-1">
+              <p className="font-body text-[#9CA3AF] text-[12px] font-normal leading-relaxed">
                 Provide extra context for the assignment
               </p>
             </div>
@@ -293,12 +302,12 @@ export default function CreateAssignmentPage() {
             {/* Subject + Topic */}
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
-                <label className="block text-[10px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-1.5 font-inter">Subject</label>
+                <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Subject</label>
                 <input value={store.subject} onChange={(e) => store.setField('subject', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.subject ? 'border-red-500 border' : ''}`} placeholder="e.g. Science" />
                 {errors.subject && <p className="form-error text-[10px]">{errors.subject}</p>}
               </div>
               <div>
-                <label className="block text-[10px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-1.5 font-inter">Topic</label>
+                <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Topic</label>
                 <input value={store.topic} onChange={(e) => store.setField('topic', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.topic ? 'border-red-500 border' : ''}`} placeholder="e.g. Electricity" />
                 {errors.topic && <p className="form-error text-[10px]">{errors.topic}</p>}
               </div>
@@ -307,7 +316,7 @@ export default function CreateAssignmentPage() {
             {/* Class + School */}
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
-                <label className="block text-[10px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-1.5 font-inter">Class / Grade</label>
+                <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Class / Grade</label>
                 {!isOtherClass ? (
                   <select
                     value={store.className}
@@ -361,7 +370,7 @@ export default function CreateAssignmentPage() {
                 {errors.className && <p className="form-error text-[10px]">{errors.className}</p>}
               </div>
               <div>
-                <label className="block text-[10px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-1.5 font-inter">School Name</label>
+                <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">School Name</label>
                 <input value={store.schoolName} onChange={(e) => store.setField('schoolName', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.schoolName ? 'border-red-500 border' : ''}`} placeholder="e.g. DPS" />
                 {errors.schoolName && <p className="form-error text-[10px]">{errors.schoolName}</p>}
               </div>
@@ -369,7 +378,7 @@ export default function CreateAssignmentPage() {
 
             {/* Time Allowed */}
             <div className="mb-8">
-              <label className="block text-[10px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-1.5 font-inter">Time Allowed</label>
+              <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Time Allowed</label>
               <div className="flex gap-3">
                 <div className={`flex items-center justify-between rounded-full flex-1 bg-white border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] h-[44px] px-3.5 ${errors.timeAllowed ? 'border-red-500 border' : ''}`}>
                   <button type="button" className="counter-btn w-5 h-5 text-lg flex items-center justify-center text-[#171717]" onClick={() => handleTimeChange((Math.max(0, parseInt(hours || '0') - 1)).toString(), minutes)}>−</button>

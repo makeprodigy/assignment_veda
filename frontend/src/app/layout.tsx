@@ -11,9 +11,9 @@ const bricolage = Bricolage_Grotesque({
   display: 'swap',
 });
 
-const inter = Inter({
+const inter = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn(bricolage.variable, inter.variable, "font-sans")}>
-      <body className="font-inter antialiased">
+      <body className="font-bricolage antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
