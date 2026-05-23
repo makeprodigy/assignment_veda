@@ -24,7 +24,7 @@ app.use(helmet());
 // CORS
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
+    origin: true, // Automatically reflects the request origin (fixes Vercel multiple domain issues)
     credentials: true,
   })
 );
