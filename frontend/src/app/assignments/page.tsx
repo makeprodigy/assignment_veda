@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { Plus, Search, Filter, MoreVertical, ChevronDown, Check, Database } from 'lucide-react';
+import { Plus, Search, Filter, MoreVertical, ChevronDown, Check, Database, Trash2 } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import ZeroState from '@/components/dashboard/ZeroState';
 import { assignmentsApi } from '@/lib/api';
@@ -157,6 +157,25 @@ export default function AssignmentsPage() {
     );
   }
 
+  const handleDemoToggle = async () => {
+    if (assignments.length > 0) {
+      if (!confirm('Delete all demo data? This cannot be undone.')) return;
+      try {
+        await Promise.all(assignments.map(a => assignmentsApi.delete(a._id)));
+        setAssignments([]);
+      } catch {
+        alert('Failed to delete demo data.');
+      }
+    } else {
+      try {
+        await assignmentsApi.seed();
+        await fetchAssignments();
+      } catch {
+        alert('Failed to load demo data.');
+      }
+    }
+  };
+
   return (
     <AppLayout title="Assignments">
       <div className="py-4 relative">
@@ -175,17 +194,17 @@ export default function AssignmentsPage() {
           </div>
           
           <button 
-            onClick={async () => {
-              try {
-                await assignmentsApi.seed();
-                window.location.reload();
-              } catch {
-                alert('Failed to load demo data.');
-              }
-            }}
-            className="flex items-center gap-2 bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#171717] px-4 py-2 rounded-full font-heading text-[13px] font-bold border border-[#E5E5E5] transition-colors cursor-pointer"
+            onClick={handleDemoToggle}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full font-heading text-[13px] font-bold border transition-colors cursor-pointer ${
+              assignments.length > 0
+                ? 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
+                : 'bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#171717] border-[#E5E5E5]'
+            }`}
           >
-            <Database size={14} /> Load Demo Data
+            {assignments.length > 0
+              ? <><Trash2 size={14} /> Delete Demo Data</>
+              : <><Database size={14} /> Load Demo Data</>
+            }
           </button>
         </div>
 

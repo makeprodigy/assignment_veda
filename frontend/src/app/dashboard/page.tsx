@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Sparkles, FileText, Calendar, Users, ArrowRight, Clock, Plus, Database } from 'lucide-react';
+import { Sparkles, FileText, Calendar, Users, ArrowRight, Clock, Plus, Database, Trash2 } from 'lucide-react';
 import { format, isAfter, startOfDay } from 'date-fns';
 import AppLayout from '@/components/layout/AppLayout';
 import EmptyAssignmentsIllustration from '@/components/illustrations/EmptyAssignmentsIllustration';
@@ -60,6 +60,28 @@ export default function DashboardPage() {
     }
   };
 
+  const handleDemoToggle = async () => {
+    if (assignments.length > 0) {
+      // Delete all assignments
+      if (!confirm('Delete all demo data? This cannot be undone.')) return;
+      try {
+        await Promise.all(assignments.map(a => assignmentsApi.delete(a._id)));
+        setAssignments([]);
+      } catch {
+        alert('Failed to delete demo data.');
+      }
+    } else {
+      // Load demo data
+      try {
+        await assignmentsApi.seed();
+        const res = await assignmentsApi.list();
+        setAssignments(res.data.data || []);
+      } catch {
+        alert('Failed to load demo data.');
+      }
+    }
+  };
+
   if (loading) {
     return (
       <AppLayout title="Dashboard">
@@ -89,17 +111,14 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-3 relative z-10">
             <button 
-              onClick={async () => {
-                try {
-                  await assignmentsApi.seed();
-                  window.location.reload();
-                } catch {
-                  alert('Failed to load demo data.');
-                }
-              }}
-              className="flex items-center gap-2 bg-white/10 text-white py-3 px-6 rounded-full font-heading font-bold text-sm border-none cursor-pointer transition-all duration-300 hover:bg-white/20 hover:-translate-y-0.5"
+              onClick={handleDemoToggle}
+              className={`flex items-center gap-2 py-3 px-6 rounded-full font-heading font-bold text-sm border-none cursor-pointer transition-all duration-300 hover:-translate-y-0.5 ${
+                assignments.length > 0
+                  ? 'bg-red-500/20 text-red-300 hover:bg-red-500/30'
+                  : 'bg-white/10 text-white hover:bg-white/20'
+              }`}
             >
-              <Database size={16} /> Load Demo Data
+              {assignments.length > 0 ? <><Trash2 size={16} /> Delete Demo Data</> : <><Database size={16} /> Load Demo Data</>}
             </button>
             <Link href="/assignments/create" className="flex items-center gap-2 bg-white text-[#111111] py-3 px-6 rounded-full font-heading font-bold text-sm no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,255,255,0.25)] hover:bg-gray-50">
               <Sparkles size={16} strokeWidth={2.5} /> Create Assignment
