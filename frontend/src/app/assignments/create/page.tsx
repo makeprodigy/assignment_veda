@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, Trash2, Plus, Sparkles, ChevronDown, Check, CalendarIcon, ArrowLeft, ArrowRight, CloudUpload } from 'lucide-react';
+import { UploadCloud, Trash2, Plus, Sparkles, ChevronDown, Check, CalendarIcon, ArrowLeft, ArrowRight, CloudUpload, Mic } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import QuestionTypeRow from '@/components/create/QuestionTypeRow';
 import LoadingJob from '@/components/shared/LoadingJob';
