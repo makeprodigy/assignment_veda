@@ -26,7 +26,7 @@ export function usePdfExport(): UsePdfExport {
       element.style.position = 'static';
 
       const opt = {
-        margin:       [0.5, 0.5, 0.5, 0.5],
+        margin:       [0.5, 0.5, 0.5, 0.5] as [number, number, number, number],
         filename:     `vedaai-paper-${jobId}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, logging: false },
