@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Plus, Upload, Mic, CloudUpload, ArrowLeft } from 'lucide-react';
+import { UploadCloud, Trash2, Plus, Sparkles, ChevronDown, Check, CalendarIcon, ArrowLeft, ArrowRight, CloudUpload } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import QuestionTypeRow from '@/components/create/QuestionTypeRow';
 import LoadingJob from '@/components/shared/LoadingJob';
@@ -148,7 +148,7 @@ export default function CreateAssignmentPage() {
           <div className={`flex-1 h-1.5 rounded-full transition-colors duration-300 ${step === 2 ? 'bg-[#171717]' : 'bg-[#E5E5E5]'}`} />
         </div>
 
-        <div className="sharp-card">
+        <div className="bg-[#F3F4F6] rounded-[32px] p-5 sm:p-8 shadow-sm">
 
         {/* ─── STEP 1 ─── */}
         {step === 1 && (
@@ -234,10 +234,10 @@ export default function CreateAssignmentPage() {
               {/* Add button */}
               <button
                 onClick={store.addQuestionType}
-                className="flex items-center gap-2.5 mt-3 bg-transparent border-none cursor-pointer font-heading text-[13px] font-bold text-[#171717]"
+                className="flex items-center gap-3 mt-4 bg-transparent border-none cursor-pointer font-heading text-[14px] font-bold text-[#171717]"
               >
-                <div className="w-7 h-7 rounded-full bg-[#171717] flex items-center justify-center">
-                  <Plus size={16} color="white" />
+                <div className="w-8 h-8 rounded-full bg-[#171717] flex items-center justify-center">
+                  <Plus size={18} color="white" strokeWidth={2.5} />
                 </div>
                 Add Question Type
               </button>
@@ -291,23 +291,23 @@ export default function CreateAssignmentPage() {
             </div>
 
             {/* Subject + Topic */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-2 gap-4 mb-5">
               <div>
-                <label className="form-label">Subject</label>
-                <input value={store.subject} onChange={(e) => store.setField('subject', e.target.value)} className={`form-input rounded-full ${errors.subject ? 'error' : ''}`} placeholder="e.g. Science" />
+                <label className="block text-[11px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-2 font-inter">Subject</label>
+                <input value={store.subject} onChange={(e) => store.setField('subject', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-5 py-3.5 text-[14px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.subject ? 'border-red-500 border' : ''}`} placeholder="e.g. Science" />
                 {errors.subject && <p className="form-error">{errors.subject}</p>}
               </div>
               <div>
-                <label className="form-label">Topic</label>
-                <input value={store.topic} onChange={(e) => store.setField('topic', e.target.value)} className={`form-input rounded-full ${errors.topic ? 'error' : ''}`} placeholder="e.g. Electricity" />
+                <label className="block text-[11px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-2 font-inter">Topic</label>
+                <input value={store.topic} onChange={(e) => store.setField('topic', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-5 py-3.5 text-[14px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.topic ? 'border-red-500 border' : ''}`} placeholder="e.g. Electricity" />
                 {errors.topic && <p className="form-error">{errors.topic}</p>}
               </div>
             </div>
 
             {/* Class + School */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-2 gap-4 mb-5">
               <div>
-                <label className="form-label">Class / Grade</label>
+                <label className="block text-[11px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-2 font-inter">Class / Grade</label>
                 {!isOtherClass ? (
                   <select
                     value={store.className}
@@ -319,7 +319,8 @@ export default function CreateAssignmentPage() {
                         store.setField('className', e.target.value);
                       }
                     }}
-                    className={`form-input form-select rounded-full ${errors.className ? 'error' : ''}`}
+                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-5 py-3.5 text-[14px] font-semibold text-[#171717] outline-none appearance-none ${errors.className ? 'border-red-500 border' : ''}`}
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171717' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
                   >
                     <option value="" disabled>Select a class</option>
                     <option value="1st Grade">1st Grade</option>
@@ -341,13 +342,13 @@ export default function CreateAssignmentPage() {
                     <input
                       value={store.className}
                       onChange={(e) => store.setField('className', e.target.value)}
-                      className={`form-input rounded-full ${errors.className ? 'error' : ''}`}
+                      className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-5 py-3.5 text-[14px] font-semibold text-[#171717] outline-none ${errors.className ? 'border-red-500 border' : ''}`}
                       placeholder="Specify class"
                       autoFocus
                     />
                     <button
                       type="button"
-                      className="btn-secondary py-2 px-3"
+                      className="bg-[#171717] text-white rounded-full px-4 font-bold text-[12px] border-none cursor-pointer"
                       onClick={() => {
                         setIsOtherClass(false);
                         store.setField('className', '');
@@ -360,22 +361,22 @@ export default function CreateAssignmentPage() {
                 {errors.className && <p className="form-error">{errors.className}</p>}
               </div>
               <div>
-                <label className="form-label">School Name</label>
-                <input value={store.schoolName} onChange={(e) => store.setField('schoolName', e.target.value)} className={`form-input rounded-full ${errors.schoolName ? 'error' : ''}`} placeholder="e.g. Delhi Public School" />
+                <label className="block text-[11px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-2 font-inter">School Name</label>
+                <input value={store.schoolName} onChange={(e) => store.setField('schoolName', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-5 py-3.5 text-[14px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.schoolName ? 'border-red-500 border' : ''}`} placeholder="e.g. Delhi Public School" />
                 {errors.schoolName && <p className="form-error">{errors.schoolName}</p>}
               </div>
             </div>
 
             {/* Time Allowed */}
-            <div className="mb-8">
-              <label className="form-label">Time Allowed</label>
+            <div className="mb-10">
+              <label className="block text-[11px] font-bold text-[#A3A3A3] uppercase tracking-wider mb-2 font-inter">Time Allowed</label>
               <div className="flex gap-4">
-                <div className={`counter-control rounded-full flex-1 justify-between ${errors.timeAllowed ? 'error' : ''}`}>
-                  <button type="button" className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => handleTimeChange((Math.max(0, parseInt(hours || '0') - 1)).toString(), minutes)}>−</button>
+                <div className={`flex items-center justify-between rounded-full flex-1 bg-white border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] h-[52px] px-5 ${errors.timeAllowed ? 'border-red-500 border' : ''}`}>
+                  <button type="button" className="counter-btn w-6 h-6 text-xl flex items-center justify-center text-[#171717]" onClick={() => handleTimeChange((Math.max(0, parseInt(hours || '0') - 1)).toString(), minutes)}>−</button>
                   <label className="flex items-center justify-center flex-1 cursor-text h-full py-2">
                     <input
                       type="number"
-                      className="hide-spin-button w-8 text-right border-none outline-none text-sm bg-transparent text-[var(--color-text-primary)] font-semibold p-0 focus:ring-0"
+                      className="hide-spin-button w-8 text-right border-none outline-none text-base bg-transparent text-[#171717] font-semibold p-0 focus:ring-0"
                       min="0"
                       placeholder="0"
                       value={hours}
@@ -384,16 +385,16 @@ export default function CreateAssignmentPage() {
                         else handleTimeChange(Math.max(0, parseInt(e.target.value)).toString(), minutes);
                       }}
                     />
-                    <span className="text-sm text-[var(--color-text-muted)] ml-1 font-medium select-none">hrs</span>
+                    <span className="text-base text-[#A3A3A3] ml-1 font-semibold select-none">hrs</span>
                   </label>
-                  <button type="button" className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => handleTimeChange((parseInt(hours || '0') + 1).toString(), minutes)}>+</button>
+                  <button type="button" className="counter-btn w-6 h-6 text-xl flex items-center justify-center text-[#171717]" onClick={() => handleTimeChange((parseInt(hours || '0') + 1).toString(), minutes)}>+</button>
                 </div>
-                <div className={`counter-control rounded-full flex-1 justify-between ${errors.timeAllowed ? 'error' : ''}`}>
-                  <button type="button" className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => handleTimeChange(hours, (Math.max(0, parseInt(minutes || '0') - 1)).toString())}>−</button>
+                <div className={`flex items-center justify-between rounded-full flex-1 bg-white border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] h-[52px] px-5 ${errors.timeAllowed ? 'border-red-500 border' : ''}`}>
+                  <button type="button" className="counter-btn w-6 h-6 text-xl flex items-center justify-center text-[#171717]" onClick={() => handleTimeChange(hours, (Math.max(0, parseInt(minutes || '0') - 1)).toString())}>−</button>
                   <label className="flex items-center justify-center flex-1 cursor-text h-full py-2">
                     <input
                       type="number"
-                      className="hide-spin-button w-8 text-right border-none outline-none text-sm bg-transparent text-[var(--color-text-primary)] font-semibold p-0 focus:ring-0"
+                      className="hide-spin-button w-8 text-right border-none outline-none text-base bg-transparent text-[#171717] font-semibold p-0 focus:ring-0"
                       min="0"
                       max="59"
                       placeholder="0"
@@ -403,19 +404,28 @@ export default function CreateAssignmentPage() {
                         else handleTimeChange(hours, Math.max(0, parseInt(e.target.value)).toString());
                       }}
                     />
-                    <span className="text-sm text-[var(--color-text-muted)] ml-1 font-medium select-none">mins</span>
+                    <span className="text-base text-[#A3A3A3] ml-1 font-semibold select-none">mins</span>
                   </label>
-                  <button type="button" className="counter-btn w-4 h-4 text-base flex items-center justify-center" onClick={() => handleTimeChange(hours, (Math.min(59, parseInt(minutes || '0') + 1)).toString())}>+</button>
+                  <button type="button" className="counter-btn w-6 h-6 text-xl flex items-center justify-center text-[#171717]" onClick={() => handleTimeChange(hours, (Math.min(59, parseInt(minutes || '0') + 1)).toString())}>+</button>
                 </div>
               </div>
               {errors.timeAllowed && <p className="form-error">{errors.timeAllowed}</p>}
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-between mt-8">
-              <button className="sharp-btn-secondary" onClick={() => store.prevStep()}>← Previous</button>
-              <button className="sharp-btn-primary" onClick={handleSubmit} disabled={isSubmitting}>
-                {isSubmitting ? 'Creating...' : 'Create Assignment →'}
+            <div className="flex justify-center gap-3 sm:gap-4 mt-8 pb-4">
+              <button 
+                className="flex flex-col items-center justify-center bg-white text-[#171717] rounded-[32px] w-[120px] h-[72px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] border-none font-bold text-[14px] font-heading transition-all active:scale-95 cursor-pointer" 
+                onClick={() => store.prevStep()}
+              >
+                <ArrowLeft size={18} strokeWidth={2.5} className="mb-0.5" /> Previous
+              </button>
+              <button 
+                className="flex flex-col items-center justify-center bg-[#171717] text-white rounded-[32px] flex-1 max-w-[200px] h-[72px] shadow-[0_4px_16px_rgba(0,0,0,0.15)] border-none font-bold text-[15px] font-heading transition-all active:scale-95 cursor-pointer"
+                onClick={handleSubmit} disabled={isSubmitting}
+              >
+                <span>{isSubmitting ? 'Creating...' : 'Create'}</span>
+                <span className="flex items-center gap-1">{isSubmitting ? '' : 'Assignment'} {!isSubmitting && <ArrowRight size={16} strokeWidth={2.5} />}</span>
               </button>
             </div>
           </div>
