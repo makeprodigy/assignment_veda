@@ -27,8 +27,8 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
 
   return (
     <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-      {/* Left: Logo (Hidden on desktop since Sidebar has it) */}
-      <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
+      {/* Left: Logo */}
+      <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
         <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
           <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
         </div>
