@@ -61,7 +61,7 @@ export async function register(req: Request, res: Response): Promise<void> {
     res.cookie('vedaai_token', token, {
       httpOnly: true,
       secure: env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 3600 * 1000 // 7 days
     });
 
@@ -115,7 +115,7 @@ export async function login(req: Request, res: Response): Promise<void> {
     res.cookie('vedaai_token', token, {
       httpOnly: true,
       secure: env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 3600 * 1000 // 7 days
     });
 
@@ -174,7 +174,7 @@ export async function logout(req: Request, res: Response): Promise<void> {
   res.cookie('vedaai_token', '', {
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 0,
     expires: new Date(0)
   });
