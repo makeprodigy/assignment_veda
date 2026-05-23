@@ -26,7 +26,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
     : 'U';
 
   return (
-    <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+    <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
       {/* Left: Logo (Hidden on desktop since Sidebar has it) */}
       <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
         <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
@@ -38,7 +38,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
       </div>
 
       {/* Right: notifications + user */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ml-auto">
         {/* Notification bell — plain icon with red dot badge */}
         <div className="relative group cursor-pointer">
           <Bell size={20} className="text-[#374151]" strokeWidth={1.8} />
@@ -101,8 +101,8 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
           )}
         </div>
 
-        {/* Hamburger Menu (Visible on Desktop and Mobile) */}
-        <div className="relative">
+        {/* Hamburger Menu (Visible on Mobile) */}
+        <div className="relative md:hidden">
           <button 
             onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
             className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2"
