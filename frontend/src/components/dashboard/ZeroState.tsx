@@ -27,7 +27,7 @@ export default function ZeroState() {
       </div>
 
       {/* Text */}
-      <h2 className="font-heading font-bold text-[16px] text-[#111827] mb-2 tracking-tight">
+      <h2 className="font-heading font-bold text-[16px] text-[#352B25] mb-2 tracking-tight">
         No assignments yet
       </h2>
       <p className="text-[13px] font-body text-[#6B7280] font-normal max-w-[400px] mb-6 leading-relaxed">
@@ -38,7 +38,7 @@ export default function ZeroState() {
       <div className="flex flex-col gap-3">
         <Link
           href="/assignments/create"
-          className="inline-flex items-center justify-center gap-2 w-[280px] h-[48px] rounded-full bg-[#111111] text-white text-[14px] font-bold font-heading no-underline shadow-sm transition-transform hover:-translate-y-0.5"
+          className="inline-flex items-center justify-center gap-2 w-[280px] h-[48px] rounded-full bg-[#352B25] text-white text-[14px] font-bold font-heading no-underline shadow-sm transition-transform hover:-translate-y-0.5"
         >
           <Plus size={16} strokeWidth={2.5} />
           Create Your First Assignment
@@ -46,7 +46,7 @@ export default function ZeroState() {
         <button
           onClick={handleSeed}
           disabled={seeding}
-          className="inline-flex items-center justify-center gap-2 w-[280px] h-[48px] rounded-full bg-[#F5F5F5] text-[#171717] text-[14px] font-bold font-heading no-underline border border-[#E5E5E5] transition-colors hover:bg-[#EBEBEB] cursor-pointer disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-2 w-[280px] h-[48px] rounded-full bg-[#F5F5F5] text-[#352B25] text-[14px] font-bold font-heading no-underline border border-[#E5E5E5] transition-colors hover:bg-[#EBEBEB] cursor-pointer disabled:opacity-50"
         >
           <Database size={16} strokeWidth={2.5} />
           {seeding ? 'Loading Data...' : 'Load Demo Data'}

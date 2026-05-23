@@ -60,7 +60,7 @@ export default function Sidebar() {
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#E65023] to-[#C93B12] flex-shrink-0 shadow-md">
           <span className="text-white font-extrabold text-lg font-bricolage leading-none">V</span>
         </div>
-        <span className="font-bricolage font-extrabold text-[26px] text-[#111827] tracking-tight">
+        <span className="font-bricolage font-extrabold text-[26px] text-[#352B25] tracking-tight">
           VedaAI
         </span>
       </div>
@@ -86,11 +86,11 @@ export default function Sidebar() {
             href={item.href}
             className={`flex items-center gap-3 px-4 py-2.5 rounded-[8px] text-[13px] no-underline transition-all duration-150 ${
               isActive(item.href)
-                ? 'bg-[#E5E7EB] text-[#111827] font-semibold'
+                ? 'bg-[#E5E7EB] text-[#352B25] font-semibold'
                 : 'text-[#6B7280] font-medium hover:bg-[#F9FAFB] hover:text-[#374151]'
             }`}
           >
-            <span className={`shrink-0 ${isActive(item.href) ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}>{item.icon}</span>
+            <span className={`shrink-0 ${isActive(item.href) ? 'text-[#352B25]' : 'text-[#9CA3AF]'}`}>{item.icon}</span>
             <span className="flex-1">{item.label}</span>
             {item.badge !== undefined && (
               <span className="ml-auto bg-[#D84315] text-white text-[10px] font-bold px-2 rounded-full min-w-[22px] h-5 flex items-center justify-center">
@@ -108,11 +108,11 @@ export default function Sidebar() {
             href="/settings"
             className={`flex items-center gap-3 px-4 py-2.5 rounded-[8px] text-[13px] no-underline transition-all duration-150 ${
               pathname.startsWith('/settings')
-                ? 'bg-[#E5E7EB] text-[#111827] font-semibold'
+                ? 'bg-[#E5E7EB] text-[#352B25] font-semibold'
                 : 'text-[#6B7280] font-medium hover:bg-[#F9FAFB] hover:text-[#374151]'
             }`}
           >
-            <span className={`shrink-0 ${pathname.startsWith('/settings') ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}><Settings size={18} strokeWidth={2} /></span>
+            <span className={`shrink-0 ${pathname.startsWith('/settings') ? 'text-[#352B25]' : 'text-[#9CA3AF]'}`}><Settings size={18} strokeWidth={2} /></span>
             Settings
           </Link>
         </div>
@@ -132,7 +132,7 @@ export default function Sidebar() {
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[14px] font-bold text-[#111827] truncate leading-tight tracking-tight">
+              <p className="text-[14px] font-bold text-[#352B25] truncate leading-tight tracking-tight">
                 {user?.schoolName || 'Delhi Public School'}
               </p>
               <p className="text-[12px] text-[#6B7280] truncate font-medium mt-0.5">

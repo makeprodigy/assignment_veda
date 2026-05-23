@@ -21,7 +21,7 @@ export default function MobileTabBar() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
-      <div className="bg-[#171717]/85 backdrop-blur-[24px] rounded-full shadow-2xl px-2 py-3 flex items-center justify-between border border-white/10">
+      <div className="bg-[#352B25]/85 backdrop-blur-[24px] rounded-full shadow-2xl px-2 py-3 flex items-center justify-between border border-white/10">
         {navItems.map((item) => {
           const active = isActive(item.href);
           const Icon = item.icon;

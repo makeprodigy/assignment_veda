@@ -107,13 +107,13 @@ export default function DashboardPage() {
       <div className="pb-8">
         
         {/* Welcome Banner */}
-        <div className="relative overflow-hidden bg-[#111111] rounded-[16px] p-8 sm:p-10 text-white mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
+        <div className="relative overflow-hidden bg-[#352B25] rounded-[16px] p-8 sm:p-10 text-white mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
           {/* Subtle gradient blob for premium feel */}
           <div className="absolute top-[-30%] right-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(216, 67, 21, 0.2) 0%, rgba(17,17,17,0) 70%)' }} />
           
           <div className="relative z-10 mb-6 sm:mb-0">
             <h1 className="font-heading text-3xl font-extrabold mb-2 tracking-tight text-white">
-              Welcome back, {getFirstName()}! 👋
+              Welcome back, {getFirstName()}!
             </h1>
             <p className="font-body text-[15px] text-[#A3A3A3] font-medium">
               Here is what is happening with your classes today.
@@ -130,7 +130,7 @@ export default function DashboardPage() {
             >
               {assignments.length > 0 ? <><Trash2 size={16} /> Delete Demo Data</> : <><Database size={16} /> Load Demo Data</>}
             </button>
-            <Link href="/assignments/create" className="flex items-center justify-center gap-2 bg-white text-[#111111] py-3 px-6 rounded-full font-heading font-bold text-sm no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,255,255,0.25)] hover:bg-gray-50">
+            <Link href="/assignments/create" className="flex items-center justify-center gap-2 bg-white text-[#352B25] py-3 px-6 rounded-full font-heading font-bold text-sm no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(255,255,255,0.25)] hover:bg-gray-50">
               <Sparkles size={16} strokeWidth={2.5} /> Create Assignment
             </Link>
           </div>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
                   <FileText size={18} color="#D84315" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#111111] leading-none tracking-tight">{totalAssignments}</h2>
+              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{totalAssignments}</h2>
             </div>
           </div>
           
@@ -160,7 +160,7 @@ export default function DashboardPage() {
                   <Users size={18} color="#0EA5E9" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#111111] leading-none tracking-tight">{uniqueClasses}</h2>
+              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{uniqueClasses}</h2>
             </div>
           </div>
           
@@ -173,7 +173,7 @@ export default function DashboardPage() {
                   <Calendar size={18} color="#EF4444" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#111111] leading-none tracking-tight">{upcomingDeadlines}</h2>
+              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{upcomingDeadlines}</h2>
             </div>
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
         {/* Recent Assignments */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-heading text-[18px] font-bold tracking-tight text-[#111827]">Recent Assignments</h2>
+            <h2 className="font-heading text-[18px] font-bold tracking-tight text-[#352B25]">Recent Assignments</h2>
             <Link href="/assignments" className="flex items-center gap-1 font-body text-[13px] font-semibold text-[#D84315] no-underline hover:text-[#BF360C] transition-colors">
               View All <ArrowRight size={14} />
             </Link>
@@ -192,15 +192,15 @@ export default function DashboardPage() {
               <div className="mb-6 flex justify-center">
                 <EmptyAssignmentsIllustration />
               </div>
-              <h3 className="font-heading text-[16px] font-bold text-[#111827] mb-2">No assignments yet</h3>
+              <h3 className="font-heading text-[16px] font-bold text-[#352B25] mb-2">No assignments yet</h3>
               <p className="font-body text-[13px] text-[#6B7280] max-w-[400px] leading-relaxed mb-6 font-normal">
                 Create your first assignment to start collecting and grading student submissions. You can set up rubrics, define marking criteria, and let AI assist with grading.
               </p>
               <div className="flex flex-col gap-3">
-                <Link href="/assignments/create" className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#111111] text-white rounded-full font-heading text-[14px] font-bold no-underline transition-transform duration-200 shadow-sm hover:-translate-y-0.5">
+                <Link href="/assignments/create" className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#352B25] text-white rounded-full font-heading text-[14px] font-bold no-underline transition-transform duration-200 shadow-sm hover:-translate-y-0.5">
                   <Plus size={16} strokeWidth={2.5} /> Create Your First Assignment
                 </Link>
-                <button onClick={handleDemoToggle} className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#F5F5F5] text-[#171717] rounded-full font-heading text-[14px] font-bold no-underline border border-[#E5E5E5] transition-colors hover:bg-[#EBEBEB] cursor-pointer">
+                <button onClick={handleDemoToggle} className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#F5F5F5] text-[#352B25] rounded-full font-heading text-[14px] font-bold no-underline border border-[#E5E5E5] transition-colors hover:bg-[#EBEBEB] cursor-pointer">
                   <Database size={16} strokeWidth={2.5} /> Load Demo Data
                 </button>
               </div>

@@ -18,7 +18,7 @@ export default function AssignmentCard({ assignment, onView, onDelete }: Assignm
       onClick={() => onView(assignment)}
     >
       <div className="flex justify-between items-start">
-        <h2 className="font-heading font-bold text-[#111827] text-[16px] tracking-tight leading-snug line-clamp-2 pr-2">
+        <h2 className="font-heading font-bold text-[#352B25] text-[16px] tracking-tight leading-snug line-clamp-2 pr-2">
           {assignment.topic || assignment.subject}
         </h2>
         <div className="relative">
@@ -32,7 +32,7 @@ export default function AssignmentCard({ assignment, onView, onDelete }: Assignm
             <div className="absolute right-0 top-[110%] bg-white rounded-xl border border-[#EAEAEA] shadow-[0_8px_24px_rgba(0,0,0,0.12)] z-50 min-w-[170px] overflow-hidden py-1">
               <button
                 onClick={(e) => { e.stopPropagation(); onView(assignment); setMenuOpen(false); }}
-                className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium cursor-pointer hover:bg-[#F8F8F8] transition-colors text-[#171717]"
+                className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium cursor-pointer hover:bg-[#F8F8F8] transition-colors text-[#352B25]"
               >
                 View Assignment
               </button>

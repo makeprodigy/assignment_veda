@@ -98,7 +98,7 @@ export default function RegisterPage() {
         <div className="auth-form-container" style={{ padding: '20px 0' }}>
           
           <div style={{ marginBottom: '16px' }}>
-            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '24px', color: '#171717', marginBottom: '4px', letterSpacing: '-0.5px' }}>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '24px', color: '#352B25', marginBottom: '4px', letterSpacing: '-0.5px' }}>
               Create an account
             </h1>
             <p style={{ color: '#666666', fontSize: '13px' }}>Get started with VedaAI for free.</p>

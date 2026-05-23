@@ -21,7 +21,7 @@ export default function SettingsPage() {
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-0.5">
             <div className="w-2 h-2 rounded-full bg-[#64748B]" />
-            <h1 className="font-heading text-lg font-bold text-[#171717] tracking-tight">
+            <h1 className="font-heading text-lg font-bold text-[#352B25] tracking-tight">
               Settings
             </h1>
           </div>
@@ -33,8 +33,8 @@ export default function SettingsPage() {
         {/* Settings Card */}
         <div className="card mb-8">
           <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#EAEAEA]">
-            <Settings size={18} className="text-[#171717]" />
-            <h3 className="font-heading text-base font-bold text-[#171717]">Profile Information</h3>
+            <Settings size={18} className="text-[#352B25]" />
+            <h3 className="font-heading text-base font-bold text-[#352B25]">Profile Information</h3>
           </div>
           
           <div className="grid gap-6">

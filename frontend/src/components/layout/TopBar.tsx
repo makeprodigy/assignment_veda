@@ -31,10 +31,10 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
       <div className="flex items-center gap-3">
         {/* Mobile Logo */}
         <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
-          <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
+          <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#352B25] flex-shrink-0 shadow-sm">
             <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
           </div>
-          <span className="font-bricolage font-extrabold text-[18px] text-[#111827] tracking-tight">
+          <span className="font-bricolage font-extrabold text-[18px] text-[#352B25] tracking-tight">
             VedaAI
           </span>
         </div>
@@ -47,7 +47,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
               className="flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)] cursor-pointer border border-gray-100"
               aria-label="Go back"
             >
-              <ArrowLeft size={20} className="text-[#171717]" strokeWidth={2} />
+              <ArrowLeft size={20} className="text-[#352B25]" strokeWidth={2} />
             </button>
           )}
 
@@ -75,7 +75,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
           {/* Hover dropdown */}
           <div className="absolute right-0 mt-3 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 w-[280px] top-full py-1">
             <div className="px-4 py-3 border-b border-gray-100">
-              <span className="text-[14px] font-semibold font-heading text-[#171717]">Notifications</span>
+              <span className="text-[14px] font-semibold font-heading text-[#352B25]">Notifications</span>
             </div>
             <div className="px-4 py-3">
               <p className="text-[13px] font-body text-[#555] mb-1">You have new assignments to review!</p>
@@ -102,7 +102,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
                 <span className="text-[#8B5E2D] font-bold text-[12px]">{initials}</span>
               )}
             </div>
-            <span className="hidden md:block font-semibold text-[#171717] text-[13px] max-w-[110px] truncate ml-1">
+            <span className="hidden md:block font-semibold text-[#352B25] text-[13px] max-w-[110px] truncate ml-1">
               {user?.name ?? 'Demo Teacher'}
             </span>
             <ChevronDown size={14} className="text-[#6B7280] hidden md:block" />
@@ -112,7 +112,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
           {isUserMenuOpen && (
             <div className="absolute right-0 top-[calc(100%+8px)] w-[220px] bg-white border border-gray-100 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] z-50 py-1 overflow-hidden">
               <div className="px-4 py-3 border-b border-gray-100 mb-1">
-                <p className="font-heading text-[14px] font-semibold text-[#171717] m-0 truncate">{user?.name ?? 'Demo Teacher'}</p>
+                <p className="font-heading text-[14px] font-semibold text-[#352B25] m-0 truncate">{user?.name ?? 'Demo Teacher'}</p>
                 <p className="font-body text-[12px] text-[#737373] mt-0.5 mb-0 truncate">{user?.email ?? 'teacher@veda.ai'}</p>
               </div>
               <button className="w-full text-left px-4 py-2.5 text-[13px] font-body font-medium text-[#555] bg-transparent border-none flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors">
@@ -132,7 +132,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
         <div className="relative md:hidden">
           <button 
             onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2"
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#352B25] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2"
           >
             <Menu size={24} strokeWidth={2} />
           </button>
@@ -142,7 +142,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
             <div className="absolute right-0 top-[calc(100%+8px)] w-[180px] bg-white border border-gray-100 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] z-50 py-2 overflow-hidden">
               <button 
                 onClick={() => { setIsHamburgerMenuOpen(false); router.push('/settings'); }}
-                className="w-full text-left px-4 py-2.5 text-[13px] font-body font-medium text-[#171717] bg-transparent border-none flex items-center gap-2.5 cursor-pointer hover:bg-gray-50 transition-colors"
+                className="w-full text-left px-4 py-2.5 text-[13px] font-body font-medium text-[#352B25] bg-transparent border-none flex items-center gap-2.5 cursor-pointer hover:bg-gray-50 transition-colors"
               >
                 <Settings size={16} className="text-[#6B7280]" /> Settings
               </button>

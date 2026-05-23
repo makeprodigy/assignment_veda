@@ -86,7 +86,7 @@ export default function LoginPage() {
         <div className="auth-form-container">
           
           <div style={{ marginBottom: '16px' }}>
-            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '24px', color: '#171717', marginBottom: '4px', letterSpacing: '-0.5px' }}>
+            <h1 style={{ fontFamily: 'var(--font-bricolage)', fontWeight: 700, fontSize: '24px', color: '#352B25', marginBottom: '4px', letterSpacing: '-0.5px' }}>
               Welcome back
             </h1>
             <p style={{ color: '#666666', fontSize: '13px' }}>Please enter your details to sign in.</p>

@@ -120,9 +120,9 @@ export default function ResultPage() {
       {/* Mobile Page Header */}
       <div className="flex md:hidden items-center justify-between mb-2 mt-2 relative">
         <button onClick={() => router.back()} className="absolute left-0 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
-          <ArrowLeft size={16} className="text-[#171717]" />
+          <ArrowLeft size={16} className="text-[#352B25]" />
         </button>
-        <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Assignment Output</h1>
+        <h1 className="w-full text-center font-heading text-lg font-bold text-[#352B25]">Assignment Output</h1>
       </div>
 
       <div className="min-h-full flex flex-col pb-12">
@@ -138,7 +138,7 @@ export default function ResultPage() {
               <button
                 onClick={() => downloadPdf(jobId)}
                 disabled={isDownloading}
-                className="px-6 py-2.5 rounded-full font-inter font-semibold text-[13px] transition-colors flex items-center gap-2 bg-white text-[#171717] hover:bg-gray-100 disabled:opacity-50 cursor-pointer border-none shadow-sm w-fit"
+                className="px-6 py-2.5 rounded-full font-inter font-semibold text-[13px] transition-colors flex items-center gap-2 bg-white text-[#352B25] hover:bg-gray-100 disabled:opacity-50 cursor-pointer border-none shadow-sm w-fit"
               >
                 <Download size={16} strokeWidth={2.5} />
                 {isDownloading ? 'Downloading...' : 'Download as PDF'}

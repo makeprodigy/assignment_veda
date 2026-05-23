@@ -182,9 +182,9 @@ export default function AssignmentsPage() {
         {/* Mobile Page Header */}
         <div className="flex md:hidden items-center justify-between mb-6 mt-2 relative">
           <button onClick={() => router.back()} className="absolute left-0 w-8 h-8 rounded-full bg-white flex items-center justify-center border border-gray-100 shadow-sm cursor-pointer z-10">
-            <ArrowLeft size={16} className="text-[#171717]" />
+            <ArrowLeft size={16} className="text-[#352B25]" />
           </button>
-          <h1 className="w-full text-center font-heading text-lg font-bold text-[#171717]">Assignments</h1>
+          <h1 className="w-full text-center font-heading text-lg font-bold text-[#352B25]">Assignments</h1>
         </div>
 
         {/* Desktop Header */}
@@ -192,7 +192,7 @@ export default function AssignmentsPage() {
           <div>
             <div className="flex items-center gap-2 mb-0.5">
               <div className="w-2 h-2 rounded-full bg-[#22c55e]" />
-              <h1 className="font-heading text-lg font-bold text-[#171717] tracking-tight">
+              <h1 className="font-heading text-lg font-bold text-[#352B25] tracking-tight">
                 Assignments
               </h1>
             </div>
@@ -206,7 +206,7 @@ export default function AssignmentsPage() {
             className={`flex items-center gap-2 px-4 py-2 rounded-full font-heading text-[13px] font-bold border transition-colors cursor-pointer ${
               assignments.length > 0
                 ? 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
-                : 'bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#171717] border-[#E5E5E5]'
+                : 'bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#352B25] border-[#E5E5E5]'
             }`}
           >
             {assignments.length > 0
@@ -234,8 +234,8 @@ export default function AssignmentsPage() {
                 <div>
                   <label className="block text-[10px] font-semibold text-[#A3A3A3] uppercase tracking-wider mb-1.5">Sort By</label>
                   <div className="flex gap-2">
-                    <button onClick={() => setSortOrder('latest')} className={`flex-1 p-1.5 rounded-md text-[12px] font-semibold cursor-pointer ${sortOrder === 'latest' ? 'border border-[#171717] bg-[#171717] text-white' : 'border border-[#E5E5E5] bg-white text-[#171717]'}`}>Latest</button>
-                    <button onClick={() => setSortOrder('oldest')} className={`flex-1 p-1.5 rounded-md text-[12px] font-semibold cursor-pointer ${sortOrder === 'oldest' ? 'border border-[#171717] bg-[#171717] text-white' : 'border border-[#E5E5E5] bg-white text-[#171717]'}`}>Oldest</button>
+                    <button onClick={() => setSortOrder('latest')} className={`flex-1 p-1.5 rounded-md text-[12px] font-semibold cursor-pointer ${sortOrder === 'latest' ? 'border border-[#352B25] bg-[#352B25] text-white' : 'border border-[#E5E5E5] bg-white text-[#352B25]'}`}>Latest</button>
+                    <button onClick={() => setSortOrder('oldest')} className={`flex-1 p-1.5 rounded-md text-[12px] font-semibold cursor-pointer ${sortOrder === 'oldest' ? 'border border-[#352B25] bg-[#352B25] text-white' : 'border border-[#E5E5E5] bg-white text-[#352B25]'}`}>Oldest</button>
                   </div>
                 </div>
 
@@ -288,7 +288,7 @@ export default function AssignmentsPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search Assignment"
-                className="w-full bg-transparent border-none outline-none text-[13px] font-body pl-2 text-[#171717] placeholder:text-[#A3A3A3]"
+                className="w-full bg-transparent border-none outline-none text-[13px] font-body pl-2 text-[#352B25] placeholder:text-[#A3A3A3]"
               />
             </div>
           </div>
@@ -317,7 +317,7 @@ export default function AssignmentsPage() {
         
         <Link 
           href="/assignments/create" 
-          className="relative pointer-events-auto flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full font-heading text-[14px] font-bold no-underline shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-all hover:-translate-y-0.5 hover:bg-[#FF5623] hover:shadow-[0_12px_28px_rgba(255,86,35,0.25)]"
+          className="relative pointer-events-auto flex items-center gap-2 bg-[#352B25] text-white px-6 py-3 rounded-full font-heading text-[14px] font-bold no-underline shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-all hover:-translate-y-0.5 hover:bg-[#FF5623] hover:shadow-[0_12px_28px_rgba(255,86,35,0.25)]"
         >
           <Plus size={16} strokeWidth={2.5} /> Create Assignment
         </Link>

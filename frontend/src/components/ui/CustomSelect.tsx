@@ -43,13 +43,13 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between bg-white rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold outline-none cursor-pointer transition-all duration-200 ${
           hasError ? 'border-2 border-red-500' : 'border border-transparent'
-        } ${isOpen ? 'shadow-[0_4px_16px_rgba(216,67,21,0.12)] border-[#FFE0D6]' : ''} ${selectedOption ? 'text-[#171717]' : 'text-[#A3A3A3]'}`}
+        } ${isOpen ? 'shadow-[0_4px_16px_rgba(216,67,21,0.12)] border-[#FFE0D6]' : ''} ${selectedOption ? 'text-[#352B25]' : 'text-[#A3A3A3]'}`}
       >
         <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
         <ChevronDown 
           size={16} 
           strokeWidth={2.5}
-          className={`text-[#171717] transition-transform duration-300 shrink-0 ml-2 ${isOpen ? 'rotate-180' : ''}`} 
+          className={`text-[#352B25] transition-transform duration-300 shrink-0 ml-2 ${isOpen ? 'rotate-180' : ''}`} 
         />
       </button>
 
@@ -66,7 +66,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = '
               className={`w-full flex items-center justify-between px-4 py-2.5 text-[13px] font-semibold text-left transition-colors cursor-pointer border-none ${
                 value === option.value
                   ? 'bg-[#FFF4F1] text-[#D84315]'
-                  : 'bg-transparent text-[#171717] hover:bg-[#F5F5F5]'
+                  : 'bg-transparent text-[#352B25] hover:bg-[#F5F5F5]'
               }`}
             >
               <span className="truncate">{option.label}</span>
