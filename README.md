@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/makeprodigy/assignment_veda/main/frontend/public/logo.svg" alt="VedaAI Logo" width="80" height="80" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712139.png'">
   <h1 align="center">VedaAI Assessment Creator</h1>
   <p align="center">
     <strong>An AI-powered assessment creation platform for teachers</strong>
@@ -32,72 +31,48 @@
 
 ## 🎯 Overview
 
-Built as a Full Stack Engineering Assignment, **VedaAI** is an AI Assessment Creator based on provided Figma designs. The system empowers teachers to:
-- Create assignments effortlessly.
-- Generate high-quality question papers using AI.
-- View, regenerate, and download the generated output.
-
-Figma Designs: [AI Assessment Creator](https://www.figma.com/design/nB2HMm1BhTpmHcHrmEslGB/VedaAI---Hiring-Assignment?node-id=0-1&t=UjYQLgEek4u99AA4-1)
+Built as a Full Stack Engineering Assignment, **VedaAI** is an AI Assessment Creator that faithfully implements the provided Figma designs. We have built a complete, production-ready system that enables teachers to instantly generate, regenerate, and manage structured assessment papers using AI.
 
 ---
 
 ## 💻 Frontend System (Assignment Creation)
 
-Using the Figma designs, the frontend provides a seamless form for teachers to create assessments.
+We built the frontend to be highly responsive and heavily reliant on smooth, modern UX, closely matching the Figma blueprints.
 
-### Features
-- **Form Inputs:** Due date, Question types, Number of questions, Marks, and Additional instructions.
-- **File Upload:** Attach contextual documents (PDF/Text) to guide the AI.
-- **Validation:** Strict validation to prevent empty or negative values.
-- **State Management:** Utilizing Zustand for robust, lightweight state management.
-- **Real-time UX:** Websocket integration to display live generation progress.
+- **Form Implementation:** A multi-step form utilizing React hooks and `Zustand` for global state management to handle complex user inputs (Question counts, types, time allowance, and contextual text). We custom-built UI elements like sleek dropdowns to replace native OS selectors.
+- **Validation:** Implemented strict input validation to ensure marks and question counts cannot be negative or empty.
+- **Real-Time UX (WebSockets):** The moment an assignment generation is queued, the UI connects to a WebSocket server. It displays a live toast notification reflecting the AI's exact progress (e.g., "Connecting to AI... 35%"), so the teacher never stares at a frozen screen.
 
 ---
 
 ## ⚙️ Backend System
 
-A robust Node.js + Express (TypeScript) architecture designed for reliability and speed.
+Our Node.js + Express (TypeScript) backend is designed for reliability and asynchronous processing, effectively separating the API from heavy AI tasks.
 
-### Flow
-1. **API Request:** Frontend submits assignment criteria.
-2. **Job Queueing:** Job is immediately added to **BullMQ**.
-3. **Background Processing:** Worker safely processes generation via AI.
-4. **Storage:** Result is stored in **MongoDB**.
-5. **Real-time Notify:** Server broadcasts completion back to Frontend via **WebSocket**.
-
-### Stack
-- **Database:** MongoDB (stores assignments & results)
-- **Caching:** Redis (stores results for fast retrieval and manages job states)
-- **Background Jobs:** BullMQ
-- **Live Updates:** WebSocket (`ws`)
+- **Job Queuing with BullMQ:** When a request hits `/api/assignments`, the backend saves a pending record in **MongoDB** and offloads the intensive LLM request to a **BullMQ** worker.
+- **Caching Layer:** We use **Redis** to aggressively cache generated question papers (for 1 hour). When a user reloads the result page, the paper is served instantly from memory without hitting MongoDB.
+- **Real-time Notifications:** As the BullMQ worker processes the Gemini response, it emits progress updates to a custom WebSocket (`ws`) server, which instantly broadcasts them to the connected frontend client.
 
 ---
 
 ## 🧠 AI Question Generation
 
-The core engine powered by Google Gemini 2.5 Flash, carefully structured to prevent raw LLM spillage.
+The core engine is powered by **Google Gemini 2.5 Flash**. We took strict measures to ensure the AI operates deterministically.
 
-### Requirements Met
-- **Prompt Engineering:** Converts user inputs into highly structured prompts.
-- **Structured Output:** Automatically generates segmented Sections (e.g., A, B), individual Questions, categorized Difficulty (Easy/Moderate/Hard), and precise Marks.
-- **No Raw LLMs:** Strictly parses and validates the output (via Zod) rather than directly rendering the LLM text.
+- **Prompt Engineering & Schema Enforcement:** We avoid raw LLM responses. Our prompt strictly instructs Gemini to return a specific JSON schema matching our internal `QuestionPaper` interface.
+- **Structured Segregation:** The worker parses the JSON to automatically group questions into Sections (A, B, etc.) and tags each question with its appropriate Difficulty (Easy/Moderate/Hard) and marks.
+- **Resilience:** The worker verifies the parsed JSON. If the structure is invalid or the API fails, it safely catches the error and notifies the frontend queue to display an error state.
 
 ---
 
 ## 📄 Output Page (Enhanced)
 
-Displays the generated question paper in a well-designed, exam-ready format.
+The output view was crafted to replicate a professional, real-world exam paper with a high degree of polish.
 
-### Elements
-- **Student Info Section:** Clean input lines for Name, Roll Number, and Section.
-- **Question Sections:** Groups questions by section with specific instructions (e.g., "Attempt all questions").
-- **Question Details:** Each question elegantly displays the question text, a visual Difficulty badge, and total marks.
-
-### UX & Bonus Features
-- Clean, highly readable layout imitating real-world exam papers.
-- Mobile responsive.
-- **PDF Export:** Proper formatting for a high-quality A4 PDF download.
-- **Action Bar:** "Regenerate" functionality with live progress updates.
+- **Structured Layout:** The paper is organized cleanly with a Top Header (School Name, Time Allowed), a Student Info section (Name, Roll No., Section), and perfectly aligned Question Sections containing specific instructions.
+- **Visual Difficulty Badges:** Each question dynamically renders a color-coded difficulty tag (Green for Easy, Yellow for Moderate, Red for Hard).
+- **PDF Export:** We built a dedicated `usePdfExport` hook using `html2pdf.js` that locks the internal viewport width (1024px) during generation. This ensures the downloaded A4 PDF maintains perfect desktop formatting and margins, even if the teacher downloads it from a mobile device.
+- **Regenerate Flow:** We added an intuitive "Regenerate" button next to the download action. This fires off a new background job and effortlessly transitions the user through the live WebSocket loading flow to the new paper.
 
 ---
 
@@ -105,9 +80,9 @@ Displays the generated question paper in a well-designed, exam-ready format.
 
 ```text
 VedaAI/
-├── frontend/          # Next.js 15 + TypeScript + Zustand + Tailwind CSS
-├── backend/           # Node.js + Express + TypeScript + BullMQ + Mongoose
-├── docker-compose.yml # MongoDB 7 + Redis 7
+├── frontend/          # Next.js 15, TypeScript, Zustand, Tailwind CSS, Lucide Icons
+├── backend/           # Node.js, Express, BullMQ, Mongoose, Redis, WebSocket
+├── docker-compose.yml # MongoDB 7 + Redis 7 configuration
 └── README.md
 ```
 
