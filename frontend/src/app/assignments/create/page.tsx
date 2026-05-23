@@ -219,7 +219,7 @@ export default function CreateAssignmentPage() {
             {/* Question Structure */}
             <div className="mb-4">
               {/* Column headers */}
-              <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 pb-2">
+              <div className="hidden md:grid grid-cols-[1fr_auto_auto_auto] gap-3 pb-2">
                 <span className="font-heading text-[12px] font-semibold text-[#171717]">Question Type</span>
                 <span />
                 <span className="font-inter text-[12px] font-semibold text-[#171717] text-center min-w-[130px]">No. of Questions</span>
@@ -240,26 +240,26 @@ export default function CreateAssignmentPage() {
               ))}
               {errors.questionTypes && <p className="form-error">{errors.questionTypes}</p>}
 
-              {/* Add button */}
-              <button
-                onClick={store.addQuestionType}
-                className="flex items-center gap-2.5 mt-2 bg-transparent border-none cursor-pointer font-inter text-[12px] font-semibold text-[#171717]"
-              >
-                <div className="w-7 h-7 rounded-full bg-[#171717] flex items-center justify-center">
-                  <Plus size={16} color="white" strokeWidth={2.5} />
-                </div>
-                Add Question Type
-              </button>
-            </div>
+              <div className="flex justify-between items-start mt-3 mb-6">
+                {/* Add button */}
+                <button
+                  onClick={store.addQuestionType}
+                  className="flex items-center gap-2.5 bg-transparent border-none cursor-pointer font-inter text-[12px] font-semibold text-[#171717]"
+                >
+                  <div className="w-7 h-7 rounded-full bg-[#171717] flex items-center justify-center">
+                    <Plus size={16} color="white" strokeWidth={2.5} />
+                  </div>
+                  Add Question Type
+                </button>
 
-            {/* Totals */}
-            <div className="flex justify-end mt-2 mb-5">
-              <div className="flex flex-col items-end gap-1.5">
-                <div className="font-inter text-[12px] text-[#171717] font-medium">
-                  Total Questions : <strong className="font-semibold">{totalQuestions}</strong>
-                </div>
-                <div className="font-inter text-[12px] text-[#171717] font-medium">
-                  Total Marks : <strong className="font-semibold">{totalMarks}</strong>
+                {/* Totals */}
+                <div className="flex flex-col items-end gap-1.5 pt-1">
+                  <div className="font-inter text-[12px] text-[#171717] font-medium">
+                    Total Questions : <strong className="font-semibold">{totalQuestions}</strong>
+                  </div>
+                  <div className="font-inter text-[12px] text-[#171717] font-medium">
+                    Total Marks : <strong className="font-semibold">{totalMarks}</strong>
+                  </div>
                 </div>
               </div>
             </div>
