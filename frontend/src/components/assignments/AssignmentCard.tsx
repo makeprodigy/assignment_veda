@@ -12,44 +12,75 @@ interface AssignmentCardProps {
 export default function AssignmentCard({ assignment, onView, onDelete }: AssignmentCardProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const totalQuestions = assignment.questionTypes?.reduce((acc, q) => acc + q.count, 0) || 0;
+  const totalMarks = assignment.questionTypes?.reduce((acc, q) => acc + (q.count * q.marks), 0) || 0;
+
   return (
     <div 
-      className="assignment-card flex flex-col justify-between h-full" 
+      className="assignment-card flex flex-col justify-between h-full group" 
       onClick={() => onView(assignment)}
     >
-      <div className="flex justify-between items-start">
-        <h2 className="font-heading font-bold text-[#352B25] text-[16px] tracking-tight leading-snug line-clamp-2 pr-2">
-          {assignment.topic || assignment.subject}
-        </h2>
-        <div className="relative">
-          <button
-            onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
-            className="bg-transparent border-none cursor-pointer p-1 text-[#BFBFBF] hover:text-[#737373] transition-colors rounded-md hover:bg-[#F5F5F5]"
-          >
-            <MoreVertical size={16} />
-          </button>
-          {menuOpen && (
-            <div className="absolute right-0 top-[110%] bg-white rounded-xl border border-[#EAEAEA] shadow-[0_8px_24px_rgba(0,0,0,0.12)] z-50 min-w-[170px] overflow-hidden py-1">
-              <button
-                onClick={(e) => { e.stopPropagation(); onView(assignment); setMenuOpen(false); }}
-                className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium cursor-pointer hover:bg-[#F8F8F8] transition-colors text-[#352B25]"
-              >
-                View Assignment
-              </button>
-              {onDelete && (
+      <div>
+        <div className="flex justify-between items-start mb-2">
+          <h2 className="font-heading font-bold text-[#352B25] text-[17px] tracking-tight leading-snug line-clamp-2 pr-2 group-hover:text-[#D84315] transition-colors">
+            {assignment.topic || assignment.subject}
+          </h2>
+          <div className="relative">
+            <button
+              onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
+              className="bg-transparent border-none cursor-pointer p-1 text-[#BFBFBF] hover:text-[#737373] transition-colors rounded-md hover:bg-[#F5F5F5]"
+            >
+              <MoreVertical size={16} />
+            </button>
+            {menuOpen && (
+              <div className="absolute right-0 top-[110%] bg-white rounded-xl border border-[#EAEAEA] shadow-[0_8px_24px_rgba(0,0,0,0.12)] z-50 min-w-[170px] overflow-hidden py-1">
                 <button
-                  onClick={(e) => { e.stopPropagation(); onDelete(assignment._id); setMenuOpen(false); }}
-                  className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium text-[#D84315] cursor-pointer hover:bg-red-50 transition-colors"
+                  onClick={(e) => { e.stopPropagation(); onView(assignment); setMenuOpen(false); }}
+                  className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium cursor-pointer hover:bg-[#F8F8F8] transition-colors text-[#352B25]"
                 >
-                  Delete
+                  View Assignment
                 </button>
-              )}
+                {onDelete && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onDelete(assignment._id); setMenuOpen(false); }}
+                    className="block w-full text-left px-3 py-2 bg-transparent border-none font-body text-[12px] font-medium text-[#D84315] cursor-pointer hover:bg-red-50 transition-colors"
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Additional Info */}
+        <div className="flex flex-col gap-1.5 mb-4">
+          <div className="flex items-center gap-2 text-[12px] font-medium text-[#737373] font-body">
+            {assignment.subject && (
+              <span className="bg-[#F8F8F8] border border-[#E5E5E5] px-2 py-0.5 rounded-md text-[#352B25] font-semibold">
+                {assignment.subject}
+              </span>
+            )}
+            {assignment.className && (
+              <>
+                {assignment.subject && <span className="text-[#D4D4D4]">•</span>}
+                <span className="text-[#5D5D5D]">{assignment.className}</span>
+              </>
+            )}
+          </div>
+          
+          {(totalQuestions > 0 || totalMarks > 0) && (
+            <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#888888] font-inter font-medium">
+              {totalQuestions > 0 && <span>{totalQuestions} Questions</span>}
+              {totalQuestions > 0 && totalMarks > 0 && <span className="w-1 h-1 rounded-full bg-[#D4D4D4]"></span>}
+              {totalMarks > 0 && <span>{totalMarks} Marks</span>}
             </div>
           )}
         </div>
       </div>
-      <div>
-        <div className="flex justify-between items-center mt-5">
+
+      <div className="pt-3 border-t border-[#F0F0F0]">
+        <div className="flex justify-between items-center">
           <div className="flex flex-col gap-0.5">
             <span className="font-inter text-[10px] font-bold uppercase tracking-widest text-[#9CA3AF]">Assigned on</span>
             <span className="font-body text-[12px] font-medium text-[#4B5563]">
