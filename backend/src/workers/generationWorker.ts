@@ -84,7 +84,7 @@ export function startWorker(): Worker<GenerationJob> {
       settings: {
         stalledInterval: 10800000, // 180 minutes (default 30s)
       },
-      drainDelay: 30000, // 30 seconds (default 5s)
+      drainDelay: 20000, // 20 seconds (default 5s)
     }
   );
 
