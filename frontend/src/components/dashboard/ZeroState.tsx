@@ -27,22 +27,21 @@ export default function ZeroState() {
       </div>
 
       {/* Text */}
-      <h2 className="font-bricolage font-bold text-2xl text-[#171717] mb-2 tracking-tight">
+      <h2 className="font-heading font-bold text-[16px] text-[#111827] mb-2 tracking-tight">
         No assignments yet
       </h2>
-      <p className="text-[15px] text-[#666666] max-w-sm mb-8 leading-relaxed">
-        You haven&apos;t created any assignments yet. Start by creating your first
-        AI-generated question paper in seconds.
+      <p className="text-[13px] font-body text-[#6B7280] font-normal max-w-[400px] mb-6 leading-relaxed">
+        Create your first assignment to start collecting and grading student submissions. You can set up rubrics, define marking criteria, and let AI assist with grading.
       </p>
 
       {/* CTA */}
       <div className="flex flex-col gap-4">
         <Link
           href="/assignments/create"
-          className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-[#171717] text-white text-sm font-bold font-heading no-underline shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-transform hover:-translate-y-0.5"
+          className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-full bg-[#111111] text-white text-[13px] font-semibold font-heading no-underline shadow-sm transition-transform hover:-translate-y-0.5"
         >
-          <Plus size={18} strokeWidth={2.5} />
-          Create Assignment
+          <Plus size={16} strokeWidth={2.5} />
+          Create Your First Assignment
         </Link>
         <button
           onClick={handleSeed}

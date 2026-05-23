@@ -41,11 +41,11 @@ export default function Sidebar() {
   }, [user]);
 
   const navItems: NavItem[] = [
-    { label: 'Home', href: '/dashboard', icon: <LayoutGrid size={20} strokeWidth={2} /> },
-    { label: 'My Groups', href: '/groups', icon: <Users size={20} strokeWidth={2} /> },
-    { label: 'Assignments', href: '/assignments', icon: <FileText size={20} strokeWidth={2} />, badge: assignmentCount > 0 ? assignmentCount : undefined },
-    { label: "AI Teacher's Toolkit", href: '/toolkit', icon: <Book size={20} strokeWidth={2} /> },
-    { label: 'My Library', href: '/library', icon: <PieChart size={20} strokeWidth={2} /> },
+    { label: 'Home', href: '/dashboard', icon: <LayoutGrid size={18} strokeWidth={2} /> },
+    { label: 'My Groups', href: '/groups', icon: <Users size={18} strokeWidth={2} /> },
+    { label: 'Assignments', href: '/assignments', icon: <FileText size={18} strokeWidth={2} />, badge: assignmentCount > 0 ? assignmentCount : undefined },
+    { label: "AI Teacher's Toolkit", href: '/toolkit', icon: <Book size={18} strokeWidth={2} /> },
+    { label: 'My Library', href: '/library', icon: <PieChart size={18} strokeWidth={2} /> },
   ];
 
   const isActive = (href: string) => {
@@ -54,7 +54,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="app-sidebar bg-white shadow-xl border-none rounded-[14px]">
+    <aside className="app-sidebar bg-[#FAFAFA] shadow-[16px_0_80px_rgba(0,0,0,0.25),4px_0_24px_rgba(0,0,0,0.15)] border-none rounded-[14px]">
       {/* Logo */}
       <div className="flex items-center gap-3 px-6 pt-8 pb-4">
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#E65023] to-[#C93B12] flex-shrink-0 shadow-md">
@@ -69,9 +69,9 @@ export default function Sidebar() {
       <div className="px-8 mt-10 mb-16">
         <Link
           href="/assignments/create"
-          className="block p-[3px] rounded-full bg-gradient-to-r from-[#F15A29] via-[#F15A29] to-[#E34A1B] hover:scale-[1.02] transition-transform duration-200 no-underline"
+          className="block p-[3px] rounded-full bg-gradient-to-r from-[#FF7A45] via-[#E65023] to-[#C93B12] hover:scale-[1.02] transition-transform duration-200 no-underline shadow-sm"
         >
-          <div className="flex items-center justify-center gap-2 bg-[#2D2D2D] text-white rounded-full py-2.5 px-4 font-inter text-[14px] font-medium w-full h-full">
+          <div className="flex items-center justify-center gap-2 bg-[#1F1F1F] text-white rounded-full py-2.5 px-4 font-inter text-[13px] font-medium w-full h-full">
             <Sparkles size={16} className="text-white fill-white" />
             Create Assignment
           </div>
@@ -84,9 +84,9 @@ export default function Sidebar() {
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-[12px] text-[14px] no-underline transition-all duration-150 ${
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-[8px] text-[13px] no-underline transition-all duration-150 ${
               isActive(item.href)
-                ? 'bg-[#F3F4F6] text-[#111827] font-medium'
+                ? 'bg-[#E5E7EB] text-[#111827] font-semibold'
                 : 'text-[#6B7280] font-medium hover:bg-[#F9FAFB] hover:text-[#374151]'
             }`}
           >
@@ -106,19 +106,19 @@ export default function Sidebar() {
         <div className="mb-4">
           <Link
             href="/settings"
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] no-underline transition-all duration-150 ${
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-[8px] text-[13px] no-underline transition-all duration-150 ${
               pathname.startsWith('/settings')
-                ? 'bg-[#F3F4F6] text-[#111827] font-medium'
+                ? 'bg-[#E5E7EB] text-[#111827] font-semibold'
                 : 'text-[#6B7280] font-medium hover:bg-[#F9FAFB] hover:text-[#374151]'
             }`}
           >
-            <span className={`shrink-0 ${pathname.startsWith('/settings') ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}><Settings size={20} strokeWidth={2} /></span>
+            <span className={`shrink-0 ${pathname.startsWith('/settings') ? 'text-[#111827]' : 'text-[#9CA3AF]'}`}><Settings size={18} strokeWidth={2} /></span>
             Settings
           </Link>
         </div>
 
         {/* School card */}
-        <div className="w-full rounded-2xl bg-[#F3F4F6] flex items-center px-4 py-3 mt-2">
+        <div className="w-full rounded-[12px] bg-[#E5E7EB] flex items-center px-4 py-3 mt-2">
           <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="w-10 h-10 rounded-full bg-[#FFE4D6] flex items-center justify-center shrink-0 overflow-hidden">
               {user && user.avatarUrl ? (

@@ -1,6 +1,6 @@
 export default function EmptyAssignmentsIllustration() {
   return (
-    <svg width="360" height="360" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="220" height="220" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_2_10580)">
         <path d="M150 269C216.274 269 270 215.274 270 149C270 82.7258 216.274 29 150 29C83.7258 29 30 82.7258 30 149C30 215.274 83.7258 269 150 269Z" fill="url(#paint0_linear_2_10580)"/>
         <g filter="url(#filter0_d_2_10580)">

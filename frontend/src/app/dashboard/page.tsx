@@ -97,7 +97,7 @@ export default function DashboardPage() {
       <div className="pb-8">
         
         {/* Welcome Banner */}
-        <div className="relative overflow-hidden bg-[#111111] rounded-3xl p-8 sm:p-10 text-white mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
+        <div className="relative overflow-hidden bg-[#111111] rounded-[16px] p-8 sm:p-10 text-white mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
           {/* Subtle gradient blob for premium feel */}
           <div className="absolute top-[-30%] right-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(216, 67, 21, 0.2) 0%, rgba(17,17,17,0) 70%)' }} />
           
@@ -128,7 +128,7 @@ export default function DashboardPage() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="group relative overflow-hidden bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D84315] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
@@ -141,7 +141,7 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0EA5E9] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
@@ -154,7 +154,7 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="group relative overflow-hidden bg-white rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#EF4444] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
             <div className="relative z-10">
               <div className="flex justify-between items-center mb-6">
@@ -182,12 +182,12 @@ export default function DashboardPage() {
               <div className="mb-6 flex justify-center">
                 <EmptyAssignmentsIllustration />
               </div>
-              <h3 className="font-heading text-[22px] font-extrabold text-[#171717] mb-3">No assignments yet</h3>
-              <p className="font-body text-sm text-[#737373] max-w-[460px] leading-relaxed mb-8 font-medium">
+              <h3 className="font-heading text-[16px] font-bold text-[#111827] mb-2">No assignments yet</h3>
+              <p className="font-body text-[13px] text-[#6B7280] max-w-[400px] leading-relaxed mb-6 font-normal">
                 Create your first assignment to start collecting and grading student submissions. You can set up rubrics, define marking criteria, and let AI assist with grading.
               </p>
-              <Link href="/assignments/create" className="flex items-center gap-2 bg-[#171717] text-white py-3 px-6 rounded-full font-heading text-sm font-bold no-underline transition-transform duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:-translate-y-0.5">
-                <Plus size={18} /> Create Your First Assignment
+              <Link href="/assignments/create" className="flex items-center gap-2 bg-[#111111] text-white py-2.5 px-5 rounded-full font-heading text-[13px] font-semibold no-underline transition-transform duration-200 shadow-sm hover:-translate-y-0.5">
+                <Plus size={16} strokeWidth={2.5} /> Create Your First Assignment
               </Link>
             </div>
           ) : (

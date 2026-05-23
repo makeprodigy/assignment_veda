@@ -50,7 +50,7 @@ export default function AppLayout({
         
         {/* Global Mobile Sticky FAB */}
         {showFab && (
-          <div className="md:hidden fixed bottom-[84px] right-5 z-40">
+          <div className="md:hidden fixed bottom-[86px] right-4 z-40">
             <Link 
               href="/assignments/create" 
               className="flex items-center justify-center w-[56px] h-[56px] rounded-full bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all active:scale-95 no-underline"
