@@ -1,9 +1,9 @@
 'use client';
 
-import { ArrowLeft, LayoutGrid, Bell, ChevronDown, LogOut, User, Menu } from 'lucide-react';
+import { ArrowLeft, LayoutGrid, Bell, ChevronDown, LogOut, User, Menu, Settings } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter, usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface TopBarProps {
   title: string;
@@ -14,6 +14,7 @@ interface TopBarProps {
 export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
   const { user, logout } = useAuthStore();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -26,8 +27,8 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
 
   return (
     <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-      {/* Left: Logo */}
-      <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
+      {/* Left: Logo (Hidden on desktop since Sidebar has it) */}
+      <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
         <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
           <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
         </div>
@@ -101,9 +102,26 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
         </div>
 
         {/* Hamburger Menu (Visible on Desktop and Mobile) */}
-        <button className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2">
-          <Menu size={24} strokeWidth={2} />
-        </button>
+        <div className="relative">
+          <button 
+            onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2"
+          >
+            <Menu size={24} strokeWidth={2} />
+          </button>
+          
+          {/* Hamburger Dropdown menu */}
+          {isHamburgerMenuOpen && (
+            <div className="absolute right-0 top-[calc(100%+8px)] w-[180px] bg-white border border-gray-100 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] z-50 py-2 overflow-hidden">
+              <button 
+                onClick={() => { setIsHamburgerMenuOpen(false); router.push('/settings'); }}
+                className="w-full text-left px-4 py-2.5 text-[13px] font-body font-medium text-[#171717] bg-transparent border-none flex items-center gap-2.5 cursor-pointer hover:bg-gray-50 transition-colors"
+              >
+                <Settings size={16} className="text-[#6B7280]" /> Settings
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
