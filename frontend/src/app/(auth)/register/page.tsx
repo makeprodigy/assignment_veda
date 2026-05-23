@@ -34,8 +34,8 @@ export default function RegisterPage() {
         schoolName,
         schoolLocation,
       });
-      const { user } = response.data.data;
-      setUser(user);
+      const { user, token } = response.data.data;
+      setUser(user, token);
       router.replace('/dashboard');
     } catch (err: unknown) {
       const axiosErr = err as { response?: { data?: { message?: string } } };

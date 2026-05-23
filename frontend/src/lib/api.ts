@@ -3,12 +3,40 @@ import type { AssignmentInput, Assignment, QuestionPaper, User } from '@/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
+export const TOKEN_KEY = 'vedaai_token';
+
+export function getToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function saveToken(token: string) {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(TOKEN_KEY, token);
+  }
+}
+
+export function clearToken() {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+}
+
 export const api = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: false, // No longer needed; using Bearer header
   headers: {
     'Content-Type': 'application/json',
   },
+});
+
+// Inject Authorization header for every request
+api.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return config;
 });
 
 // Response interceptor – handle 401
@@ -16,9 +44,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401 && typeof window !== 'undefined') {
-      // Don't redirect if we are already on login or logout pages
       if (window.location.pathname !== '/login' && window.location.pathname !== '/logout') {
-        window.location.href = '/logout';
+        clearToken();
+        window.location.href = '/login';
       }
     }
     return Promise.reject(error);
@@ -28,6 +56,7 @@ api.interceptors.response.use(
 // ── Auth ──────────────────────────────────────────────────────────────────────
 
 interface LoginResponse {
+  token: string;
   user: User;
 }
 

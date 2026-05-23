@@ -24,8 +24,8 @@ export default function LoginPage() {
 
     try {
       const response = await authApi.login(email, password, role);
-      const { user } = response.data.data;
-      setUser(user);
+      const { user, token } = response.data.data;
+      setUser(user, token);
       router.replace('/dashboard');
     } catch (err: unknown) {
       const axiosErr = err as { response?: { data?: { message?: string } } };

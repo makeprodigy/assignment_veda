@@ -68,6 +68,7 @@ export async function register(req: Request, res: Response): Promise<void> {
     res.status(201).json({
       success: true,
       data: {
+        token,
         user: {
           id: payload.id,
           name: user.name,
@@ -122,6 +123,7 @@ export async function login(req: Request, res: Response): Promise<void> {
     res.status(200).json({
       success: true,
       data: {
+        token,
         user: {
           id: payload.id,
           name: user.name,
