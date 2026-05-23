@@ -28,13 +28,13 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <>
-    <div className="bg-white md:bg-transparent rounded-[20px] md:rounded-none p-3.5 md:p-0 mb-3 md:mb-0 shadow-[0_2px_12px_rgba(0,0,0,0.04)] md:shadow-none border border-gray-100 md:border-none flex flex-col md:grid md:grid-cols-[1fr_auto_auto_auto] gap-3 md:items-center py-2.5">
+    <div className="bg-white md:bg-transparent rounded-[24px] md:rounded-none p-4 md:p-0 mb-4 md:mb-0 shadow-[0_2px_12px_rgba(0,0,0,0.04)] md:shadow-none flex flex-col md:grid md:grid-cols-[1fr_auto_auto_auto] gap-3 md:gap-3 md:items-center">
       {/* Type dropdown */}
-      <div className="flex justify-between items-center md:contents">
+      <div className="flex justify-between items-center md:contents px-1 md:px-0 mb-1 md:mb-0">
         <select
           value={config.type}
           onChange={(e) => onUpdate(index, { type: e.target.value })}
-          className="form-input form-select m-0 rounded-full w-full md:w-auto bg-[#F5F5F5] md:bg-white border-none font-semibold text-[12px] md:text-[13px] text-[#171717] outline-none h-9 md:h-10 px-3"
+          className="form-select m-0 rounded-full md:rounded-full w-full md:w-auto bg-transparent md:bg-white border-none font-medium text-[13px] md:font-semibold text-[#171717] outline-none h-auto md:h-10 px-0 md:px-3 focus:ring-0 shadow-none md:shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
         >
           {QUESTION_TYPES.map((t) => (
             <option key={t} value={t}>{t}</option>
@@ -44,9 +44,9 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
         {/* Remove button (Mobile) */}
         <button
           onClick={() => onRemove(index)}
-          className="md:hidden ml-3 bg-transparent border-none cursor-pointer text-[#171717] flex items-center justify-center p-1"
+          className="md:hidden ml-2 bg-transparent border-none cursor-pointer text-[#171717] flex items-center justify-center p-1 opacity-60"
         >
-          <X size={18} strokeWidth={2} />
+          <X size={16} strokeWidth={2} />
         </button>
       </div>
 
@@ -59,15 +59,15 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
       </button>
 
       {/* Counters Row */}
-      <div className="flex gap-3 md:contents">
+      <div className="bg-[#F5F5F5] md:bg-transparent rounded-[16px] md:rounded-none p-3.5 md:p-0 flex flex-row gap-4 md:contents">
         {/* Count control */}
-        <div className="flex-1 md:flex-initial">
-          <label className="block md:hidden text-[10px] font-semibold text-[#171717] mb-1.5 pl-2">No. of Questions</label>
-          <div className="counter-control rounded-full w-full justify-between bg-[#F5F5F5] md:bg-white border-none h-9 md:h-10 px-3">
-            <button className="counter-btn w-5 h-5 text-base flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { count: Math.max(1, config.count - 1) })}>−</button>
+        <div className="flex-1 flex flex-col items-center md:items-start md:flex-initial">
+          <label className="block md:hidden text-[11px] font-medium text-[#171717] mb-2.5 text-center w-full">No. of Questions</label>
+          <div className="counter-control rounded-full w-full md:w-auto justify-between bg-white md:bg-white border-none h-10 px-3 shadow-[0_1px_3px_rgba(0,0,0,0.05)] md:shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+            <button className="counter-btn w-6 h-6 text-[20px] flex items-center justify-center text-[#A3A3A3] hover:text-[#171717]" onClick={() => onUpdate(index, { count: Math.max(1, config.count - 1) })}>−</button>
             <input
               type="number"
-              className="hide-spin-button w-8 text-center border-none outline-none text-[12px] md:text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
+              className="hide-spin-button w-8 text-center border-none outline-none text-[14px] bg-transparent text-[#171717] font-semibold p-0"
               min="1"
               value={config.count === 0 ? '' : config.count}
               onChange={(e) => {
@@ -82,18 +82,18 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
                 if (!config.count || config.count < 1) onUpdate(index, { count: 1 });
               }}
             />
-            <button className="counter-btn w-5 h-5 text-base flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { count: config.count + 1 })}>+</button>
+            <button className="counter-btn w-6 h-6 text-[20px] flex items-center justify-center text-[#A3A3A3] hover:text-[#171717]" onClick={() => onUpdate(index, { count: config.count + 1 })}>+</button>
           </div>
         </div>
 
         {/* Marks control */}
-        <div className="flex-1 md:flex-initial">
-          <label className="block md:hidden text-[10px] font-semibold text-[#171717] mb-1.5 pl-2">Marks</label>
-          <div className="counter-control rounded-full w-full justify-between bg-[#F5F5F5] md:bg-white border-none h-9 md:h-10 px-3">
-            <button className="counter-btn w-5 h-5 text-base flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { marks: Math.max(1, config.marks - 1) })}>−</button>
+        <div className="flex-1 flex flex-col items-center md:items-start md:flex-initial">
+          <label className="block md:hidden text-[11px] font-medium text-[#171717] mb-2.5 text-center w-full">Marks</label>
+          <div className="counter-control rounded-full w-full md:w-auto justify-between bg-white md:bg-white border-none h-10 px-3 shadow-[0_1px_3px_rgba(0,0,0,0.05)] md:shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+            <button className="counter-btn w-6 h-6 text-[20px] flex items-center justify-center text-[#A3A3A3] hover:text-[#171717]" onClick={() => onUpdate(index, { marks: Math.max(1, config.marks - 1) })}>−</button>
             <input
               type="number"
-              className="hide-spin-button w-8 text-center border-none outline-none text-[12px] md:text-[13px] bg-transparent text-[var(--color-text-primary)] font-semibold p-0"
+              className="hide-spin-button w-8 text-center border-none outline-none text-[14px] bg-transparent text-[#171717] font-semibold p-0"
               min="1"
               value={config.marks === 0 ? '' : config.marks}
               onChange={(e) => {
@@ -108,7 +108,7 @@ export default function QuestionTypeRow({ config, index, diagramFile, onUpdate, 
                 if (!config.marks || config.marks < 1) onUpdate(index, { marks: 1 });
               }}
             />
-            <button className="counter-btn w-5 h-5 text-base flex items-center justify-center text-[#171717]" onClick={() => onUpdate(index, { marks: config.marks + 1 })}>+</button>
+            <button className="counter-btn w-6 h-6 text-[20px] flex items-center justify-center text-[#A3A3A3] hover:text-[#171717]" onClick={() => onUpdate(index, { marks: config.marks + 1 })}>+</button>
           </div>
         </div>
       </div>

@@ -186,9 +186,14 @@ export default function DashboardPage() {
               <p className="font-body text-[13px] text-[#6B7280] max-w-[400px] leading-relaxed mb-6 font-normal">
                 Create your first assignment to start collecting and grading student submissions. You can set up rubrics, define marking criteria, and let AI assist with grading.
               </p>
-              <Link href="/assignments/create" className="flex items-center gap-2 bg-[#111111] text-white py-2.5 px-5 rounded-full font-heading text-[13px] font-semibold no-underline transition-transform duration-200 shadow-sm hover:-translate-y-0.5">
-                <Plus size={16} strokeWidth={2.5} /> Create Your First Assignment
-              </Link>
+              <div className="flex flex-col gap-3">
+                <Link href="/assignments/create" className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#111111] text-white rounded-full font-heading text-[14px] font-bold no-underline transition-transform duration-200 shadow-sm hover:-translate-y-0.5">
+                  <Plus size={16} strokeWidth={2.5} /> Create Your First Assignment
+                </Link>
+                <button onClick={handleDemoToggle} className="flex items-center justify-center gap-2 w-[280px] h-[48px] bg-[#F5F5F5] text-[#171717] rounded-full font-heading text-[14px] font-bold no-underline border border-[#E5E5E5] transition-colors hover:bg-[#EBEBEB] cursor-pointer">
+                  <Database size={16} strokeWidth={2.5} /> Load Demo Data
+                </button>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
