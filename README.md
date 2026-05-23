@@ -76,13 +76,34 @@ The output view was crafted to replicate a professional, real-world exam paper w
 
 ---
 
-## 🏗️ Architecture
+## 📁 Folder Structure
 
 ```text
 VedaAI/
-├── frontend/          # Next.js 15, TypeScript, Zustand, Tailwind CSS, Lucide Icons
-├── backend/           # Node.js, Express, BullMQ, Mongoose, Redis, WebSocket
-├── docker-compose.yml # MongoDB 7 + Redis 7 configuration
+├── backend/
+│   ├── src/
+│   │   ├── controllers/      # API logic (Assignments, Auth, Results)
+│   │   ├── models/           # Mongoose Schemas (User, Assignment, Result)
+│   │   ├── queues/           # BullMQ queues and workers for AI background jobs
+│   │   ├── routes/           # Express router endpoints
+│   │   ├── services/         # Gemini AI Service, Redis caching, PDF generator
+│   │   ├── types/            # TypeScript interfaces and definitions
+│   │   └── index.ts          # Express & WebSocket server entry point
+│   ├── .env.example
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── app/              # Next.js App Router (Dashboard, Create, Output)
+│   │   ├── components/       # Reusable UI components (CustomSelect, Layout)
+│   │   ├── hooks/            # Custom React hooks (e.g., usePdfExport)
+│   │   ├── lib/              # Axios API client and WebSocket handlers
+│   │   ├── store/            # Zustand global state stores (Auth, Jobs)
+│   │   └── types/            # Shared TypeScript types
+│   ├── public/               # Static assets
+│   ├── .env.local.example
+│   ├── tailwind.config.ts
+│   └── package.json
+├── docker-compose.yml        # Infrastructure setup (MongoDB 7 + Redis 7)
 └── README.md
 ```
 
