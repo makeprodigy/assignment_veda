@@ -96,8 +96,6 @@ export async function generateQuestionPaper(input: AssignmentInput): Promise<Que
 
   try {
     const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
-
     const prompt = buildPrompt(input);
 
     const parts: any[] = [prompt];
@@ -113,12 +111,34 @@ export async function generateQuestionPaper(input: AssignmentInput): Promise<Que
       });
     }
 
-    const result = await model.generateContent(parts);
-    const response = result.response;
-    rawText = response.text();
+    const modelsToTry = [
+      'gemini-2.5-flash',
+      'gemini-3.1-flash-lite',
+      'gemini-2.5-flash-lite',
+      'gemini-2.0-flash'
+    ];
 
-    if (!rawText || rawText.trim().length === 0) {
-      throw new Error('Gemini returned an empty response');
+    let lastError: any = null;
+
+    for (const modelName of modelsToTry) {
+      try {
+        console.log(`[LLM] Attempting generation with model: ${modelName}`);
+        const model = genAI.getGenerativeModel({ model: modelName });
+        const result = await model.generateContent(parts);
+        rawText = result.response.text();
+
+        if (rawText && rawText.trim().length > 0) {
+          lastError = null; // Success
+          break;
+        }
+      } catch (err: any) {
+        console.warn(`[LLM] Model ${modelName} failed: ${err.message || 'Unknown error'}`);
+        lastError = err;
+      }
+    }
+
+    if (lastError || !rawText || rawText.trim().length === 0) {
+      throw new Error(`All Gemini models failed. Last error: ${lastError?.message || 'Empty response'}`);
     }
 
     // Clean the text: remove markdown code fences if present
