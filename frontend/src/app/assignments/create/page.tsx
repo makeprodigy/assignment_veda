@@ -19,6 +19,7 @@ export default function CreateAssignmentPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [isOtherClass, setIsOtherClass] = useState(false);
+  const [isOtherSubject, setIsOtherSubject] = useState(false);
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
 
@@ -138,6 +139,7 @@ export default function CreateAssignmentPage() {
       setHours('');
       setMinutes('');
       setIsOtherClass(false);
+      setIsOtherSubject(false);
       router.push('/dashboard');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to create assignment';
@@ -322,7 +324,55 @@ export default function CreateAssignmentPage() {
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
                 <label className="block text-[12px] font-semibold text-[#171717] mb-1.5 font-inter">Subject</label>
-                <input value={store.subject} onChange={(e) => store.setField('subject', e.target.value)} className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none placeholder:text-[#A3A3A3] ${errors.subject ? 'border-red-500 border' : ''}`} placeholder="e.g. Science" />
+                {!isOtherSubject ? (
+                  <select
+                    value={store.subject}
+                    onChange={(e) => {
+                      if (e.target.value === 'Other') {
+                        setIsOtherSubject(true);
+                        store.setField('subject', '');
+                      } else {
+                        store.setField('subject', e.target.value);
+                      }
+                    }}
+                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none appearance-none cursor-pointer ${errors.subject ? 'border-red-500 border' : ''}`}
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171717' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '14px' }}
+                  >
+                    <option value="" disabled>Select</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Science">General Science</option>
+                    <option value="English">English</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Economics">Economics</option>
+                    <option value="Literature">Literature</option>
+                    <option value="Other">Other...</option>
+                  </select>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      value={store.subject}
+                      onChange={(e) => store.setField('subject', e.target.value)}
+                      className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none ${errors.subject ? 'border-red-500 border' : ''}`}
+                      placeholder="Enter subject"
+                      autoFocus
+                    />
+                    <button
+                      type="button"
+                      className="bg-[#171717] text-white rounded-full px-3 font-bold text-[11px] border-none cursor-pointer"
+                      onClick={() => {
+                        setIsOtherSubject(false);
+                        store.setField('subject', '');
+                      }}
+                    >
+                      Back
+                    </button>
+                  </div>
+                )}
                 {errors.subject && <p className="form-error text-[10px]">{errors.subject}</p>}
               </div>
               <div>
@@ -347,7 +397,7 @@ export default function CreateAssignmentPage() {
                         store.setField('className', e.target.value);
                       }
                     }}
-                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none appearance-none ${errors.className ? 'border-red-500 border' : ''}`}
+                    className={`w-full bg-white rounded-full border-none shadow-[0_2px_8px_rgba(0,0,0,0.04)] px-4 py-2.5 text-[13px] font-semibold text-[#171717] outline-none appearance-none cursor-pointer ${errors.className ? 'border-red-500 border' : ''}`}
                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171717' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '14px' }}
                   >
                     <option value="" disabled>Select</option>

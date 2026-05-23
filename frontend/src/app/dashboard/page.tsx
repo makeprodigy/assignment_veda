@@ -11,6 +11,7 @@ import { useAuthStore } from '@/store/authStore';
 import { Assignment } from '@/types';
 import AssignmentCard from '@/components/assignments/AssignmentCard';
 import { useRouter } from 'next/navigation';
+import { useJobStore } from '@/store/jobStore';
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
@@ -18,19 +19,28 @@ export default function DashboardPage() {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const jobStore = useJobStore();
+
+  const fetchAssignments = async () => {
+    try {
+      const res = await assignmentsApi.list();
+      setAssignments(res.data.data || []);
+    } catch {
+      // Silently fail, user sees 0
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchAssignments = async () => {
-      try {
-        const res = await assignmentsApi.list();
-        setAssignments(res.data.data || []);
-      } catch {
-        // Silently fail, user sees 0
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchAssignments();
   }, []);
+
+  useEffect(() => {
+    if (jobStore.status === 'completed') {
+      fetchAssignments();
+    }
+  }, [jobStore.status]);
 
   // Compute stats
   const totalAssignments = assignments.length;

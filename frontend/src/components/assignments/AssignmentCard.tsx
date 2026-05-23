@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { MoreVertical } from 'lucide-react';
+import { MoreVertical, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Assignment } from '@/types';
 
@@ -65,9 +65,10 @@ export default function AssignmentCard({ assignment, onView, onDelete }: Assignm
             </div>
           )}
         </div>
-        {assignment.status === 'processing' && (
-          <div className="mt-3 text-xs text-[var(--color-orange)] font-heading font-semibold">
-            ⏳ Generating...
+        {(assignment.status === 'processing' || assignment.status === 'pending') && (
+          <div className="mt-3 flex items-center gap-1.5 text-xs text-[var(--color-orange)] font-heading font-semibold">
+            <Loader2 size={12} className="animate-spin" />
+            Generating...
           </div>
         )}
       </div>
