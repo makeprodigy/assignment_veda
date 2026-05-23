@@ -12,8 +12,18 @@ export function initWebSocket(server: http.Server): WebSocketServer {
   wss.on('connection', (ws: WebSocket, request: http.IncomingMessage) => {
     let isAuthenticated = false;
     try {
-      const cookieStr = request.headers.cookie || '';
-      const token = cookieStr.split('; ').find(c => c.startsWith('vedaai_token='))?.split('=')[1];
+      let token = '';
+      
+      if (request.url) {
+        const urlParams = new URLSearchParams(request.url.split('?')[1] || '');
+        token = urlParams.get('token') || '';
+      }
+      
+      if (!token) {
+        const cookieStr = request.headers.cookie || '';
+        token = cookieStr.split('; ').find(c => c.startsWith('vedaai_token='))?.split('=')[1] || '';
+      }
+
       if (token) {
         jwt.verify(token, env.JWT_SECRET);
         isAuthenticated = true;

@@ -1,4 +1,8 @@
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:4000';
+const getBaseWSUrl = () => {
+  if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+  return apiUrl.replace(/^http/, 'ws');
+};
 
 type ProgressCallback = (progress: number, message: string) => void;
 type CompleteCallback = (resultId: string) => void;
@@ -34,7 +38,13 @@ export class WSClient {
     if (typeof window === 'undefined') return;
 
     try {
-      this.socket = new WebSocket(WS_URL);
+      const baseUrl = getBaseWSUrl();
+      const wsUrl = new URL(baseUrl);
+      const token = localStorage.getItem('vedaai_token');
+      if (token) {
+        wsUrl.searchParams.set('token', token);
+      }
+      this.socket = new WebSocket(wsUrl.toString());
 
       this.socket.onopen = () => {
         this.reconnectAttempts = 0;
