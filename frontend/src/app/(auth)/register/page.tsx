@@ -5,13 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
-import type { UserRole } from '@/types';
 
 export default function RegisterPage() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
 
-  const [role, setRole] = useState<UserRole>('teacher');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +25,6 @@ export default function RegisterPage() {
     setName('Demo Teacher');
     setEmail(DEMO_EMAIL);
     setPassword(DEMO_PASSWORD);
-    setRole('teacher');
     setSchoolName('Springfield Academy');
     setSchoolLocation('New Delhi, India');
     setError('');
@@ -43,7 +40,7 @@ export default function RegisterPage() {
         name,
         email,
         password,
-        role,
+        role: 'teacher',
         schoolName,
         schoolLocation,
       });
@@ -121,20 +118,6 @@ export default function RegisterPage() {
             >
               Fill In →
             </button>
-          </div>
-
-          {/* Role toggle */}
-          <div className="auth-role-toggle">
-            {(['teacher', 'student'] as UserRole[]).map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={() => setRole(r)}
-                className={`auth-role-btn ${role === r ? 'active' : ''}`}
-              >
-                {r}
-              </button>
-            ))}
           </div>
 
           {/* Error */}

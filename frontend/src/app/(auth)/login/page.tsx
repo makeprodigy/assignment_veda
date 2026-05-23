@@ -11,7 +11,6 @@ export default function LoginPage() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
 
-  const [role, setRole] = useState<UserRole>('teacher');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +22,6 @@ export default function LoginPage() {
   const fillDemo = () => {
     setEmail(DEMO_EMAIL);
     setPassword(DEMO_PASSWORD);
-    setRole('teacher');
     setError('');
   };
 
@@ -33,7 +31,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await authApi.login(email, password, role);
+      const response = await authApi.login(email, password, 'teacher');
       const { user, token } = response.data.data;
       setUser(user, token);
       router.replace('/dashboard');
@@ -110,19 +108,6 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* Role toggle */}
-          <div className="auth-role-toggle">
-            {(['teacher', 'student'] as UserRole[]).map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={() => setRole(r)}
-                className={`auth-role-btn ${role === r ? 'active' : ''}`}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
 
           {/* Error */}
           {error && (
