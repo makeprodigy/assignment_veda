@@ -101,7 +101,7 @@ export default function ResultPage() {
           </div>
 
           {/* Question Paper (Full Width Style) */}
-          <div className="flex justify-center w-full bg-white rounded-[32px] overflow-hidden p-4 sm:p-12">
+          <div className="flex justify-center w-full bg-white rounded-[32px] overflow-hidden p-1 sm:p-4 md:p-8">
             <div 
               id="question-paper-content" 
               className="w-full min-h-[1123px] bg-white"

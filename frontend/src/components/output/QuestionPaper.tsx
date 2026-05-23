@@ -10,7 +10,7 @@ interface Props {
 
 export default function QuestionPaper({ paper, images }: Props) {
   return (
-    <div className="bg-white p-12">
+    <div className="bg-white p-4 sm:p-8 md:p-12">
       {/* School Header */}
       <div className="text-center mb-8">
         <div className="font-body text-2xl font-bold text-[var(--color-text-primary)]">{paper.schoolName}</div>
