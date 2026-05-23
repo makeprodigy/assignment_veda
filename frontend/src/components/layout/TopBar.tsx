@@ -27,14 +27,41 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
 
   return (
     <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-      {/* Left: Logo */}
-      <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
-        <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
-          <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
+      {/* Left: Desktop Breadcrumbs & Mobile Logo */}
+      <div className="flex items-center gap-3">
+        {/* Mobile Logo */}
+        <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
+          <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
+            <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
+          </div>
+          <span className="font-bricolage font-extrabold text-[18px] text-[#111827] tracking-tight">
+            VedaAI
+          </span>
         </div>
-        <span className="font-bricolage font-extrabold text-[18px] text-[#111827] tracking-tight">
-          VedaAI
-        </span>
+
+        {/* Desktop Breadcrumbs */}
+        <div className="hidden md:flex items-center gap-3">
+          {showBackButton && (
+            <button
+              onClick={() => backHref ? router.push(backHref) : router.back()}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)] cursor-pointer border border-gray-100"
+              aria-label="Go back"
+            >
+              <ArrowLeft size={20} className="text-[#171717]" strokeWidth={2} />
+            </button>
+          )}
+
+          <div className="flex items-center gap-2.5 ml-1">
+            <LayoutGrid size={20} className="text-[#9CA3AF]" strokeWidth={2} />
+            {breadcrumb && (
+              <>
+                <span className="text-[16px] font-semibold text-[#9CA3AF] font-bricolage">{breadcrumb}</span>
+                <span className="text-[16px] font-semibold text-[#9CA3AF] mx-0.5">/</span>
+              </>
+            )}
+            <h1 className="text-[16px] font-semibold text-[#9CA3AF] font-bricolage">{title}</h1>
+          </div>
+        </div>
       </div>
 
       {/* Right: notifications + user */}
