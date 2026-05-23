@@ -43,6 +43,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/results', resultRoutes);
 
+// Base route for uptime monitors
+app.get('/', (_req, res) => {
+  res.status(200).send('VedaAI Backend is running smoothly.');
+});
+
 // Health check
 app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
