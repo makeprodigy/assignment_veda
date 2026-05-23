@@ -6,6 +6,7 @@ import MobileTabBar from './MobileTabBar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Plus } from 'lucide-react';
+import { Toaster } from 'sonner';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ export default function AppLayout({
 
   return (
     <div className="flex h-screen overflow-hidden bg-[var(--color-bg)]">
+      <Toaster position="bottom-center" toastOptions={{ style: { fontFamily: 'var(--font-heading)' } }} />
       <div className="hidden md:block h-full">
         <Sidebar />
       </div>

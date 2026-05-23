@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { UploadCloud, Trash2, Plus, Sparkles, ChevronDown, Check, CalendarIcon, ArrowLeft, ArrowRight, CloudUpload, Mic } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import QuestionTypeRow from '@/components/create/QuestionTypeRow';
-import LoadingJob from '@/components/shared/LoadingJob';
+import { toast } from 'sonner';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useJobStore } from '@/store/jobStore';
 import { assignmentsApi } from '@/lib/api';
@@ -17,7 +17,6 @@ export default function CreateAssignmentPage() {
   const [dragOver, setDragOver] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [showLoading, setShowLoading] = useState(false);
 
   const [isOtherClass, setIsOtherClass] = useState(false);
   const [hours, setHours] = useState('');
@@ -97,28 +96,49 @@ export default function CreateAssignmentPage() {
       const { jobId } = res.data.data;
 
       jobStore.setJob(jobId);
-      setShowLoading(true);
+
+      const toastId = toast.loading('Generating your question paper... 0%', {
+        description: 'Connecting to AI...',
+      });
 
       wsClient.connect(
         jobId,
-        (progress, message) => jobStore.setProgress(progress, message),
+        (progress, message) => {
+          jobStore.setProgress(progress, message);
+          toast.loading(`Generating your question paper... ${progress}%`, {
+            id: toastId,
+            description: message || 'This usually takes 10-30 seconds',
+          });
+        },
         (resultId) => {
           wsClient.disconnect();
           jobStore.setComplete(resultId);
-          setShowLoading(false);
-          store.reset();
-          setHours('');
-          setMinutes('');
-          setIsOtherClass(false);
-          router.push(`/assignments/result/${jobId}`);
+          toast.success('Question paper generated successfully!', {
+            id: toastId,
+            description: 'Your assignment is ready to view.',
+            action: {
+              label: 'View Paper',
+              onClick: () => router.push(`/assignments/result/${jobId}`),
+            },
+            duration: 10000,
+          });
         },
         (error) => {
           wsClient.disconnect();
           jobStore.setFailed(error);
-          setShowLoading(false);
-          alert(`Generation failed: ${error}`);
+          toast.error(`Generation failed`, {
+            id: toastId,
+            description: error || 'An error occurred during generation.',
+            duration: 6000,
+          });
         }
       );
+
+      store.reset();
+      setHours('');
+      setMinutes('');
+      setIsOtherClass(false);
+      router.push('/dashboard');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to create assignment';
       alert(msg);
@@ -131,7 +151,6 @@ export default function CreateAssignmentPage() {
 
   return (
     <AppLayout title="Create Assignment" backHref="/dashboard">
-      {showLoading && <LoadingJob />}
 
       {/* Mobile Page Header */}
       <div className="flex md:hidden items-center justify-between mb-2 mt-2 px-4 relative">
