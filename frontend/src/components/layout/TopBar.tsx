@@ -25,42 +25,15 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
     : 'U';
 
   return (
-    <header className="flex items-center justify-between px-3 md:px-5 py-2 md:py-2 z-10 shrink-0 border border-white/30 bg-white/80 backdrop-blur-md rounded-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.03)]">
-      {/* Left: Mobile Logo & Desktop Breadcrumb */}
-      <div className="flex items-center gap-3">
-        {/* Mobile Logo */}
-        <div className="flex md:hidden items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#E65023] to-[#C93B12] flex-shrink-0 shadow-sm">
-            <span className="text-white font-extrabold text-sm font-bricolage leading-none">V</span>
-          </div>
-          <span className="font-bricolage font-extrabold text-[17px] text-[#111827] tracking-tight">
-            VedaAI
-          </span>
+    <header className="flex items-center justify-between px-4 md:px-6 py-3 z-10 shrink-0 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+      {/* Left: Logo */}
+      <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
+        <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#171717] flex-shrink-0 shadow-sm">
+          <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
         </div>
-
-        {/* Desktop Breadcrumbs */}
-        <div className="hidden md:flex items-center gap-3">
-          {showBackButton && (
-            <button
-              onClick={() => backHref ? router.push(backHref) : router.back()}
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-sm cursor-pointer border border-gray-100"
-              aria-label="Go back"
-            >
-              <ArrowLeft size={18} className="text-[#171717]" />
-            </button>
-          )}
-
-          <div className="flex items-center gap-3 ml-1">
-            <LayoutGrid size={18} className="text-[#9CA3AF]" strokeWidth={2} />
-            {breadcrumb && (
-              <>
-                <span className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{breadcrumb}</span>
-                <span className="text-[15px] font-semibold text-[#9CA3AF] mx-0.5">/</span>
-              </>
-            )}
-            <h1 className="text-[15px] font-semibold text-[#9CA3AF] font-bricolage">{title}</h1>
-          </div>
-        </div>
+        <span className="font-bricolage font-extrabold text-[18px] text-[#111827] tracking-tight">
+          VedaAI
+        </span>
       </div>
 
       {/* Right: notifications + user */}
@@ -86,33 +59,33 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
           </div>
         </div>
 
-        {/* User pill: avatar + name + chevron */}
+        {/* User pill */}
         <div className="relative">
           <button
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-            className="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm hover:shadow-md transition-all cursor-pointer"
+            className="flex items-center gap-2 bg-white md:border md:border-gray-200 rounded-full md:pl-1.5 md:pr-3 md:py-1.5 transition-all cursor-pointer border-none"
           >
             {/* Avatar circle */}
-            <div className="w-7 h-7 rounded-full bg-[#f0e6d3] flex items-center justify-center shrink-0 overflow-hidden border-2 border-white shadow-sm">
+            <div className="w-[34px] h-[34px] md:w-8 md:h-8 rounded-full bg-[#f0e6d3] flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
               {user?.avatarUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
               ) : (
-                <span className="text-[#8B5E2D] font-bold text-[11px]">{initials}</span>
+                <span className="text-[#8B5E2D] font-bold text-[12px]">{initials}</span>
               )}
             </div>
-            <span className="font-semibold text-[#171717] text-[13px] max-w-[110px] truncate">
-              {user?.name ?? 'Teacher'}
+            <span className="hidden md:block font-semibold text-[#171717] text-[13px] max-w-[110px] truncate ml-1">
+              {user?.name ?? 'Demo Teacher'}
             </span>
-            <ChevronDown size={14} className="text-[#6B7280]" />
+            <ChevronDown size={14} className="text-[#6B7280] hidden md:block" />
           </button>
 
           {/* Dropdown menu */}
           {isUserMenuOpen && (
             <div className="absolute right-0 top-[calc(100%+8px)] w-[220px] bg-white border border-gray-100 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] z-50 py-1 overflow-hidden">
               <div className="px-4 py-3 border-b border-gray-100 mb-1">
-                <p className="font-heading text-[14px] font-semibold text-[#171717] m-0 truncate">{user?.name ?? 'John Doe'}</p>
-                <p className="font-body text-[12px] text-[#737373] mt-0.5 mb-0 truncate">{user?.email ?? 'john@example.com'}</p>
+                <p className="font-heading text-[14px] font-semibold text-[#171717] m-0 truncate">{user?.name ?? 'Demo Teacher'}</p>
+                <p className="font-body text-[12px] text-[#737373] mt-0.5 mb-0 truncate">{user?.email ?? 'teacher@veda.ai'}</p>
               </div>
               <button className="w-full text-left px-4 py-2.5 text-[13px] font-body font-medium text-[#555] bg-transparent border-none flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors">
                 <User size={14} /> Profile Settings
@@ -127,9 +100,9 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
           )}
         </div>
 
-        {/* Mobile Hamburger Menu */}
-        <button className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] hover:bg-gray-50 transition-colors">
-          <Menu size={22} strokeWidth={2.5} />
+        {/* Hamburger Menu (Visible on Desktop and Mobile) */}
+        <button className="flex items-center justify-center w-8 h-8 rounded-lg bg-transparent border-none text-[#171717] cursor-pointer hover:opacity-70 transition-opacity ml-1 md:ml-2">
+          <Menu size={24} strokeWidth={2} />
         </button>
       </div>
     </header>

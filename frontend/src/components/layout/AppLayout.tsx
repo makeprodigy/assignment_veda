@@ -32,13 +32,11 @@ export default function AppLayout({
       </div>
       <main className="flex flex-col flex-1 h-screen overflow-hidden relative">
         {showTopBar && (
-          <div className="absolute top-4 left-4 right-4 z-50 pointer-events-none">
-            <div className="pointer-events-auto">
-              <TopBar title={title} backHref={backHref} breadcrumb={breadcrumb} />
-            </div>
+          <div className="z-50 shrink-0 m-4 mb-0">
+            <TopBar title={title} backHref={backHref} breadcrumb={breadcrumb} />
           </div>
         )}
-        <div className="flex-1 overflow-y-auto px-4 pb-[90px] md:pb-4 pt-[80px]">
+        <div className="flex-1 overflow-y-auto px-4 pb-[90px] md:pb-4 pt-4">
           {children}
         </div>
         
