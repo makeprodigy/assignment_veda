@@ -28,17 +28,17 @@
 
 <hr />
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/sparkles.svg" width="24" height="24" align="top" /> Key Features
+## <img src="https://api.iconify.design/lucide:sparkles.svg?color=white" width="24" height="24" align="top" /> Key Features
 
-- <img src="https://unpkg.com/lucide-static@0.320.0/icons/brain.svg" width="18" height="18" align="top" /> **AI-Driven Generation:** Leverages Google Gemini 2.5 Flash to create contextual, accurate, and diverse questions.
-- <img src="https://unpkg.com/lucide-static@0.320.0/icons/zap.svg" width="18" height="18" align="top" /> **Asynchronous Processing:** BullMQ & Redis manage generation tasks in the background, ensuring the server remains highly responsive.
-- <img src="https://unpkg.com/lucide-static@0.320.0/icons/refresh-cw.svg" width="18" height="18" align="top" /> **Real-Time Updates:** WebSockets stream live progress events (e.g., Analyzing, Generating, Validating) directly to the user's dashboard.
-- <img src="https://unpkg.com/lucide-static@0.320.0/icons/file-text.svg" width="18" height="18" align="top" /> **High-Fidelity PDF Export:** Client-side HTML-to-PDF rendering ensures perfect A4 layouts regardless of the user's device.
-- <img src="https://unpkg.com/lucide-static@0.320.0/icons/lock.svg" width="18" height="18" align="top" /> **Secure & Stateless:** Custom JWT-based authentication combined with rigorous Zod payload validation.
+- <img src="https://api.iconify.design/lucide:brain.svg?color=white" width="18" height="18" align="top" /> **AI-Driven Generation:** Leverages Google Gemini 2.5 Flash to create contextual, accurate, and diverse questions.
+- <img src="https://api.iconify.design/lucide:zap.svg?color=white" width="18" height="18" align="top" /> **Asynchronous Processing:** BullMQ & Redis manage generation tasks in the background, ensuring the server remains highly responsive.
+- <img src="https://api.iconify.design/lucide:refresh-cw.svg?color=white" width="18" height="18" align="top" /> **Real-Time Updates:** WebSockets stream live progress events (e.g., Analyzing, Generating, Validating) directly to the user's dashboard.
+- <img src="https://api.iconify.design/lucide:file-text.svg?color=white" width="18" height="18" align="top" /> **High-Fidelity PDF Export:** Client-side HTML-to-PDF rendering ensures perfect A4 layouts regardless of the user's device.
+- <img src="https://api.iconify.design/lucide:lock.svg?color=white" width="18" height="18" align="top" /> **Secure & Stateless:** Custom JWT-based authentication combined with rigorous Zod payload validation.
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/image.svg" width="24" height="24" align="top" /> UI Showcase
+## <img src="https://api.iconify.design/lucide:image.svg?color=white" width="24" height="24" align="top" /> UI Showcase
 
 <table align="center" width="100%" border="0" cellspacing="0" cellpadding="8">
   <tr>
@@ -55,7 +55,7 @@
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/layers.svg" width="24" height="24" align="top" /> High-Level Design (HLD)
+## <img src="https://api.iconify.design/lucide:layers.svg?color=white" width="24" height="24" align="top" /> High-Level Design (HLD)
 
 The system follows a decoupled, service-oriented architecture. The frontend is a static Next.js application that communicates with a Node.js/Express backend via RESTful APIs and WebSockets. Heavy AI computations are offloaded to asynchronous workers via BullMQ.
 
@@ -98,7 +98,7 @@ graph TD
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/settings-2.svg" width="24" height="24" align="top" /> Low-Level Design (LLD)
+## <img src="https://api.iconify.design/lucide:settings-2.svg?color=white" width="24" height="24" align="top" /> Low-Level Design (LLD)
 
 The backend is modularized to ensure separation of concerns.
 
@@ -152,7 +152,7 @@ classDiagram
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/database.svg" width="24" height="24" align="top" /> Database Schema (ERD)
+## <img src="https://api.iconify.design/lucide:database.svg?color=white" width="24" height="24" align="top" /> Database Schema (ERD)
 
 The MongoDB schema is designed relationally using `ObjectIds` to link users, their generation requests, and the final results.
 
@@ -198,7 +198,7 @@ erDiagram
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/git-merge.svg" width="24" height="24" align="top" /> System Flow Diagram
+## <img src="https://api.iconify.design/lucide:git-merge.svg?color=white" width="24" height="24" align="top" /> System Flow Diagram
 
 ### Assignment Creation & Real-Time Sync
 This sequence illustrates how an assignment is requested and how the user is kept updated in real-time.
@@ -245,7 +245,7 @@ sequenceDiagram
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/terminal.svg" width="24" height="24" align="top" /> Local Setup & Installation
+## <img src="https://api.iconify.design/lucide:terminal.svg?color=white" width="24" height="24" align="top" /> Local Setup & Installation
 
 ### Prerequisites
 - **Node.js**: v18+
@@ -290,7 +290,7 @@ sequenceDiagram
 
 ---
 
-## <img src="https://unpkg.com/lucide-static@0.320.0/icons/blocks.svg" width="24" height="24" align="top" /> Technology Stack Breakdown
+## <img src="https://api.iconify.design/lucide:blocks.svg?color=white" width="24" height="24" align="top" /> Technology Stack Breakdown
 
 | Technology | Role | Why this choice? |
 |---|---|---|
@@ -304,5 +304,5 @@ sequenceDiagram
 ---
 
 <div align="center">
-  <p><b>Built with <img src="https://unpkg.com/lucide-static@0.320.0/icons/heart.svg" width="16" height="16" align="top" /> for Educators.</b></p>
+  <p><b>Built with <img src="https://api.iconify.design/lucide:heart.svg?color=white" width="16" height="16" align="top" /> for Educators.</b></p>
 </div>
