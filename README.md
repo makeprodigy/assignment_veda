@@ -177,7 +177,7 @@ erDiagram
         String name
         String email "Unique"
         String password "Hashed"
-        String role "teacher/student"
+        String role "teacher"
         String schoolName
         String schoolLocation
         String avatarUrl
