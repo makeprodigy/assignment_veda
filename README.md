@@ -31,6 +31,7 @@
 ## <img src="https://api.iconify.design/lucide:list.svg?color=white" width="24" height="24" align="top" /> Table of Contents
 
 - [Key Features](#key-features)
+- [Technology Stack Breakdown](#technology-stack-breakdown)
 - [UI Showcase](#ui-showcase)
 - [High-Level Design (HLD)](#high-level-design-hld)
 - [Low-Level Design (LLD)](#low-level-design-lld)
@@ -38,7 +39,6 @@
 - [System Flow Diagram](#system-flow-diagram)
 - [Local Setup & Installation](#local-setup--installation)
 - [API Reference](#api-reference)
-- [Technology Stack Breakdown](#technology-stack-breakdown)
 
 ---
 
@@ -49,6 +49,19 @@
 - <img src="https://api.iconify.design/lucide:refresh-cw.svg?color=white" width="18" height="18" align="top" /> **Real-Time Updates:** WebSockets stream live progress events (e.g., Analyzing, Generating, Validating) directly to the user's dashboard.
 - <img src="https://api.iconify.design/lucide:file-text.svg?color=white" width="18" height="18" align="top" /> **High-Fidelity PDF Export:** Client-side HTML-to-PDF rendering ensures perfect A4 layouts regardless of the user's device.
 - <img src="https://api.iconify.design/lucide:lock.svg?color=white" width="18" height="18" align="top" /> **Secure & Stateless:** Custom JWT-based authentication combined with rigorous Zod payload validation.
+
+---
+
+## <img src="https://api.iconify.design/lucide:blocks.svg?color=white" width="24" height="24" align="top" /> Technology Stack Breakdown
+
+| Technology | Role | Why this choice? |
+|---|---|---|
+| **Zod** | Validation | Single source of truth for runtime validation on API endpoints, preventing malformed data from reaching the database. |
+| **BullMQ + Redis** | Job Queue | AI calls to Gemini can take 5–15 seconds. Pushing them to a background queue prevents HTTP timeouts, frees up the main Node thread, and allows the frontend to poll/stream progress reliably. |
+| **WebSocket** | Real-Time Comm | Pushes `job:progress`, `job:completed`, and `job:failed` events directly to the browser tab that submitted the job, so the loading screen updates dynamically. |
+| **Zustand** | Client State | Holds the complex multi-step assignment form data in memory (Question counts, types, time allowance). |
+| **html2pdf.js** | PDF Generation | Allows perfect 1024px desktop-formatted exports directly from the client, even if the user is on mobile. |
+| **JWT** | Authentication | Lightweight, stateless session management, eliminating the need for complex session stores or third-party paid auth providers. |
 
 ---
 
@@ -345,19 +358,6 @@ Below are the main endpoints exposed by the Express backend. All protected route
 | `GET` | `/api/assignments` | Retrieve a list of all assignments created by the user | ✅ |
 | `GET` | `/api/assignments/:id` | Fetch specific metadata about an assignment | ✅ |
 | `GET` | `/api/results/job/:jobId` | Retrieve the generated Question Paper JSON by Job ID | ✅ |
-
----
-
-## <img src="https://api.iconify.design/lucide:blocks.svg?color=white" width="24" height="24" align="top" /> Technology Stack Breakdown
-
-| Technology | Role | Why this choice? |
-|---|---|---|
-| **Zod** | Validation | Single source of truth for runtime validation on API endpoints, preventing malformed data from reaching the database. |
-| **BullMQ + Redis** | Job Queue | AI calls to Gemini can take 5–15 seconds. Pushing them to a background queue prevents HTTP timeouts, frees up the main Node thread, and allows the frontend to poll/stream progress reliably. |
-| **WebSocket** | Real-Time Comm | Pushes `job:progress`, `job:completed`, and `job:failed` events directly to the browser tab that submitted the job, so the loading screen updates dynamically. |
-| **Zustand** | Client State | Holds the complex multi-step assignment form data in memory (Question counts, types, time allowance). |
-| **html2pdf.js** | PDF Generation | Allows perfect 1024px desktop-formatted exports directly from the client, even if the user is on mobile. |
-| **JWT** | Authentication | Lightweight, stateless session management, eliminating the need for complex session stores or third-party paid auth providers. |
 
 ---
 
