@@ -4,6 +4,7 @@ import { ArrowLeft, LayoutGrid, Bell, ChevronDown, LogOut, User, Menu, Settings 
 import { useAuthStore } from '@/store/authStore';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
+import { Logo } from '@/components/Logo';
 
 interface TopBarProps {
   title: string;
@@ -31,9 +32,7 @@ export default function TopBar({ title, backHref, breadcrumb }: TopBarProps) {
       <div className="flex items-center gap-3">
         {/* Mobile Logo */}
         <div className="flex md:hidden items-center gap-3 cursor-pointer" onClick={() => router.push('/dashboard')}>
-          <div className="flex items-center justify-center w-[34px] h-[34px] rounded-[10px] bg-[#352B25] flex-shrink-0 shadow-sm">
-            <span className="text-white font-extrabold text-[15px] font-bricolage leading-none">V</span>
-          </div>
+          <Logo className="w-[34px] h-[34px] rounded-[10px] shadow-sm" />
           <span className="font-bricolage font-extrabold text-[18px] text-[#352B25] tracking-tight">
             VedaAI
           </span>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
 import type { UserRole } from '@/types';
+import { Logo } from '@/components/Logo';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -53,9 +54,9 @@ export default function LoginPage() {
         <div className="auth-orb-2"></div>
         
         <div className="auth-left-content">
-          <div className="auth-left-logo-row">
-            <div className="auth-logo-box">V</div>
-            <span className="auth-left-logo-text">VedaAI</span>
+          <div className="auth-left-logo-row" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '40px' }}>
+            <Logo className="w-[48px] h-[48px] rounded-[14px] shadow-lg" />
+            <span className="auth-left-logo-text" style={{ margin: 0 }}>VedaAI</span>
           </div>
           
           <div>

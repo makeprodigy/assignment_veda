@@ -1,5 +1,5 @@
 // Creates a demo teacher user + seeds their assignments via the live API
-const BACKEND_URL = 'https://assignment-veda.onrender.com';
+const BACKEND_URL = 'http://localhost:4000';
 
 const DEMO_EMAIL = 'demo@vedaai.app';
 const DEMO_PASSWORD = 'Demo@1234';
