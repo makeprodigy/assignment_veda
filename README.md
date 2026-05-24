@@ -23,10 +23,16 @@
 </div>
 
 ## UI Screenshots
-<p align="center">
-  <img src="./frontend/public/dashboard.png" alt="Desktop View" height="380" />
-  <img src="./frontend/public/mobile_view.png" alt="Mobile View" height="380" />
-</p>
+<table align="center" width="100%" border="0" cellspacing="0" cellpadding="8">
+  <tr>
+    <td align="center" width="75%">
+      <img src="./frontend/public/dashboard.png" alt="Desktop View" width="100%" />
+    </td>
+    <td align="center" width="25%">
+      <img src="./frontend/public/mobile_view.png" alt="Mobile View" width="100%" />
+    </td>
+  </tr>
+</table>
 
 ---
 
