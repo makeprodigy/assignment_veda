@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
 
   const DEMO_EMAIL = 'demo@vedaai.app';
-  const DEMO_PASSWORD = 'Demo@1234';
+  const DEMO_PASSWORD = 'VedaDemo!2026#Secure';
 
   const fillDemo = () => {
     setName('Demo Teacher');
