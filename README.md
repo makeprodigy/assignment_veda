@@ -1,197 +1,308 @@
 <div align="center">
-  <h1 align="center">VedaAI Assessment Creator</h1>
+  <div style="padding: 20px;">
+    <!-- Logo or Icon can go here -->
+  </div>
+  <h1 align="center" style="font-size: 3.5rem; margin-bottom: 10px; font-weight: bold; background: -webkit-linear-gradient(45deg, #0070f3, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">VedaAI</h1>
+  <p align="center" style="font-size: 1.2rem; color: #666;">
+    <strong>Next-Generation AI-Powered Assessment Creation Platform</strong>
+  </p>
   <p align="center">
-    <strong>An AI-powered assessment creation platform for teachers</strong>
-    <br/>
-    VedaAI allows teachers to create custom assignments in seconds by describing a topic. The AI generates structured question papers with sections and an answer key. The platform handles the full lifecycle: assignment generation, real-time status streaming, paper preview, and PDF exporting. Built on Next.js, Express, MongoDB, BullMQ, and Google Gemini — with real-time progress streaming via WebSockets.
+    VedaAI allows educators to generate comprehensive, highly structured question papers in seconds. By describing a topic, providing context, or uploading reference materials, the AI crafts customized assessments complete with varying difficulty levels, specific question types, and a detailed answer key.
   </p>
 
   <p align="center">
-    <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js" />
-    <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-4-cyan?logo=tailwind-css" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/Express.js-Node.js-green?logo=node.js" alt="Express" />
+    <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-4-cyan?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Express.js-Node.js-green?style=for-the-badge&logo=node.js" alt="Express" />
     <br/>
-    <img src="https://img.shields.io/badge/MongoDB%20Atlas-Database-47A248?logo=mongodb&logoColor=white" alt="MongoDB Atlas" />
-    <img src="https://img.shields.io/badge/Upstash-Redis%20%26%20BullMQ-00E9A3?logo=redis&logoColor=white" alt="Upstash" />
-    <img src="https://img.shields.io/badge/Render-Backend-46E3B7?logo=render&logoColor=white" alt="Render" />
+    <img src="https://img.shields.io/badge/MongoDB%20Atlas-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB Atlas" />
+    <img src="https://img.shields.io/badge/Upstash-Redis%20%26%20BullMQ-00E9A3?style=for-the-badge&logo=redis&logoColor=white" alt="Upstash" />
+    <img src="https://img.shields.io/badge/Render-Backend-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render" />
     <br/>
     <a href="https://assignment-veda.vercel.app/">
-      <img src="https://img.shields.io/badge/Live_Demo-Vercel-black?logo=vercel" alt="Live Demo" />
+      <img src="https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel" alt="Live Demo" />
     </a>
   </p>
 </div>
 
-## UI Screenshots
+<hr />
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/sparkles.svg" width="24" height="24" align="top" /> Key Features
+
+- <img src="https://unpkg.com/lucide-static@0.320.0/icons/brain.svg" width="18" height="18" align="top" /> **AI-Driven Generation:** Leverages Google Gemini 2.5 Flash to create contextual, accurate, and diverse questions.
+- <img src="https://unpkg.com/lucide-static@0.320.0/icons/zap.svg" width="18" height="18" align="top" /> **Asynchronous Processing:** BullMQ & Redis manage generation tasks in the background, ensuring the server remains highly responsive.
+- <img src="https://unpkg.com/lucide-static@0.320.0/icons/refresh-cw.svg" width="18" height="18" align="top" /> **Real-Time Updates:** WebSockets stream live progress events (e.g., Analyzing, Generating, Validating) directly to the user's dashboard.
+- <img src="https://unpkg.com/lucide-static@0.320.0/icons/file-text.svg" width="18" height="18" align="top" /> **High-Fidelity PDF Export:** Client-side HTML-to-PDF rendering ensures perfect A4 layouts regardless of the user's device.
+- <img src="https://unpkg.com/lucide-static@0.320.0/icons/lock.svg" width="18" height="18" align="top" /> **Secure & Stateless:** Custom JWT-based authentication combined with rigorous Zod payload validation.
+
+---
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/image.svg" width="24" height="24" align="top" /> UI Showcase
+
 <table align="center" width="100%" border="0" cellspacing="0" cellpadding="8">
   <tr>
     <td align="center" width="75%">
-      <img src="./frontend/public/dashboard.png" alt="Desktop View" width="100%" />
+      <strong>Desktop Dashboard</strong><br/>
+      <img src="./frontend/public/dashboard.png" alt="Desktop View" width="100%" style="border-radius: 8px; border: 1px solid #eaeaea;" />
     </td>
     <td align="center" width="25%">
-      <img src="./frontend/public/mobile_view.png" alt="Mobile View" width="100%" />
+      <strong>Mobile Responsive</strong><br/>
+      <img src="./frontend/public/mobile_view.png" alt="Mobile View" width="100%" style="border-radius: 8px; border: 1px solid #eaeaea;" />
     </td>
   </tr>
 </table>
 
 ---
 
-## Local setup
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/layers.svg" width="24" height="24" align="top" /> High-Level Design (HLD)
+
+The system follows a decoupled, service-oriented architecture. The frontend is a static Next.js application that communicates with a Node.js/Express backend via RESTful APIs and WebSockets. Heavy AI computations are offloaded to asynchronous workers via BullMQ.
+
+```mermaid
+graph TD
+    %% Define Styles
+    classDef client fill:#f9f9f9,stroke:#333,stroke-width:2px,color:#000;
+    classDef api fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000;
+    classDef queue fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000;
+    classDef worker fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000;
+    classDef db fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000;
+    classDef ext fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#000;
+
+    %% Nodes
+    Client["Next.js Client App<br/> Zustand | WebSockets"]:::client
+    API["Express REST API<br/> Zod | JWT"]:::api
+    Redis[("Redis - Upstash<br/> BullMQ Cache")]:::queue
+    Worker["Background Worker<br/> Task Processor"]:::worker
+    MongoDB[("MongoDB Atlas<br/> Primary Data")]:::db
+    Gemini["Google Gemini API<br/> AI Engine"]:::ext
+
+    %% Connections
+    Client <-->|REST Requests &<br/> WebSocket Streams| API
+    API -->|Write/Read| MongoDB
+    API -->|Enqueue Job| Redis
+    Redis -->|Dequeue Job| Worker
+    Worker -->|Prompt & Context| Gemini
+    Gemini -->|Generated JSON| Worker
+    Worker -->|Update Status & Result| MongoDB
+    Worker -.->|Publish Event| Redis
+    API -.->|Subscribe Event| Redis
+```
+
+### Architecture Highlights
+- **Client Tier**: Next.js 15 handles routing and SSR where needed, while Zustand manages complex multi-step form states.
+- **API Tier**: Express handles authentication, rate limiting, and request validation (Zod). It provides REST endpoints and a WebSocket server.
+- **Message Broker Tier**: Redis (via Upstash) acts as the backbone for BullMQ, managing job queues, retries, and pub/sub for WebSocket events.
+- **Worker Tier**: A dedicated Node process picks up generation jobs, communicates with Google Gemini, processes the response, and writes the final structured document to MongoDB.
+- **Data Tier**: MongoDB Atlas stores Users, Assignments (job metadata), and Results (the actual generated papers).
+
+---
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/settings-2.svg" width="24" height="24" align="top" /> Low-Level Design (LLD)
+
+The backend is modularized to ensure separation of concerns.
+
+```mermaid
+classDiagram
+    class ClientRouter {
+        +POST /api/assignments
+        +GET /api/assignments
+        +GET /api/results/job/:id
+    }
+    
+    class AuthMiddleware {
+        +verifyJWT()
+    }
+    
+    class AssignmentController {
+        +createAssignment(req, res)
+        +getAssignments(req, res)
+    }
+    
+    class QueueService {
+        +addGenerateJob(data)
+    }
+    
+    class GenerateWorker {
+        +process(job)
+    }
+    
+    class AIService {
+        +generatePaper(prompt, context)
+    }
+    
+    class WebSocketManager {
+        +initialize(server)
+        +broadcastProgress(jobId, status)
+    }
+
+    ClientRouter --> AuthMiddleware : Uses
+    ClientRouter --> AssignmentController : Routes to
+    AssignmentController --> QueueService : Enqueues
+    QueueService ..> GenerateWorker : Triggers (via Redis)
+    GenerateWorker --> AIService : Calls
+    GenerateWorker --> WebSocketManager : Emits Progress
+```
+
+### Key Modules
+1. **Middlewares**: `auth.middleware.ts` decodes JWTs; `upload.middleware.ts` (Multer) handles context file uploads.
+2. **Controllers**: Map HTTP requests to business logic. Validates inputs using `zod`.
+3. **Services**: Core logic. `AIService` constructs the Gemini prompts and handles retry logic.
+4. **Workers**: BullMQ `Worker` instance that executes the heavy lifting without blocking the main event loop.
+
+---
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/database.svg" width="24" height="24" align="top" /> Database Schema (ERD)
+
+The MongoDB schema is designed relationally using `ObjectIds` to link users, their generation requests, and the final results.
+
+```mermaid
+erDiagram
+    USER {
+        ObjectId _id PK
+        String name
+        String email "Unique"
+        String password "Hashed"
+        String role "teacher/student"
+        String schoolName
+        Date createdAt
+    }
+
+    ASSIGNMENT {
+        ObjectId _id PK
+        ObjectId userId FK
+        String subject
+        String topic
+        String className
+        Date dueDate
+        Array questionTypes "e.g. {type, count, marks}"
+        String status "pending/processing/completed"
+        String jobId "BullMQ Job ID"
+        ObjectId resultId FK "Nullable until complete"
+        Date createdAt
+    }
+
+    RESULT {
+        ObjectId _id PK
+        String jobId "Unique Index"
+        ObjectId assignmentId FK
+        ObjectId userId FK
+        Object paper "Structured JSON from AI"
+        Date createdAt
+    }
+
+    USER ||--o{ ASSIGNMENT : "creates"
+    USER ||--o{ RESULT : "owns"
+    ASSIGNMENT ||--o| RESULT : "generates"
+```
+
+---
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/git-merge.svg" width="24" height="24" align="top" /> System Flow Diagram
+
+### Assignment Creation & Real-Time Sync
+This sequence illustrates how an assignment is requested and how the user is kept updated in real-time.
+
+```mermaid
+sequenceDiagram
+    actor Teacher
+    participant NextJS as Frontend
+    participant Express as Backend API
+    participant Redis as BullMQ / Redis
+    participant Worker as Background Worker
+    participant Gemini as Google Gemini AI
+    participant Mongo as MongoDB
+
+    Teacher->>NextJS: Submits "Create Assignment" Form
+    NextJS->>Express: POST /api/assignments (Auth + Payload)
+    Express->>Mongo: Create Assignment (status: pending)
+    Express->>Redis: Enqueue 'generate-paper' Job
+    Redis-->>Express: Return jobId
+    Express-->>NextJS: 200 OK { jobId }
+    
+    NextJS->>NextJS: Redirect to /loading/[jobId]
+    NextJS->>Express: Connect WebSocket (room: jobId)
+    
+    Worker->>Redis: Dequeue Job
+    Worker->>Express: Publish 'processing' event via Redis
+    Express->>NextJS: WebSocket Event: "Analyzing Context"
+    
+    Worker->>Worker: Parse Files / Context
+    Worker->>Gemini: Request generation (JSON Schema)
+    Gemini-->>Worker: Return JSON Payload
+    
+    Worker->>Mongo: Save Result Document
+    Worker->>Mongo: Update Assignment (status: completed, resultId)
+    
+    Worker->>Express: Publish 'completed' event via Redis
+    Express->>NextJS: WebSocket Event: "Job Completed"
+    
+    NextJS->>NextJS: Redirect to /result/[jobId]
+    NextJS->>Express: GET /api/results/job/[jobId]
+    Express-->>NextJS: Return Renderable Paper JSON
+    NextJS-->>Teacher: Displays beautiful UI & PDF Export
+```
+
+---
+
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/terminal.svg" width="24" height="24" align="top" /> Local Setup & Installation
 
 ### Prerequisites
-- Node.js 18+
-- Docker & Docker Compose (optional for local DB/Redis)
-- A MongoDB Atlas free cluster (or local instance)
-- An Upstash Redis database (or local instance)
-- A Google Gemini API Key
+- **Node.js**: v18+
+- **Docker & Docker Compose**: (optional for local DB/Redis)
+- **MongoDB**: A free cluster on MongoDB Atlas (or local instance)
+- **Redis**: An Upstash Redis database (or local instance)
+- **Google Gemini API Key**: From Google AI Studio
 
-### Backend
-```bash
-cp backend/.env.example backend/.env
-# Fill in: MONGODB_URI, REDIS_URL, GEMINI_API_KEY, JWT_SECRET, FRONTEND_URL
-cd backend && npm install && npm run dev
-```
-Server runs at `http://localhost:4000`.
+### Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Copy the environment template:
+   ```bash
+   cp .env.example .env
+   ```
+3. Fill in your `.env` variables (`MONGODB_URI`, `REDIS_URL`, `GEMINI_API_KEY`, `JWT_SECRET`, `FRONTEND_URL`).
+4. Install dependencies and start the development server:
+   ```bash
+   npm install
+   npm run dev
+   ```
+   *The server will run at `http://localhost:4000`.*
 
-### Frontend
-```bash
-cp frontend/.env.local.example frontend/.env.local
-# Fill in: NEXT_PUBLIC_API_URL
-cd frontend && npm install && npm run dev
-```
-App runs at `http://localhost:3000`.
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Copy the environment template:
+   ```bash
+   cp .env.local.example .env.local
+   ```
+3. Fill in your `.env.local` variables (`NEXT_PUBLIC_API_URL`).
+4. Install dependencies and start the application:
+   ```bash
+   npm install
+   npm run dev
+   ```
+   *The app will run at `http://localhost:3000`.*
 
 ---
 
-## Architecture overview
+## <img src="https://unpkg.com/lucide-static@0.320.0/icons/blocks.svg" width="24" height="24" align="top" /> Technology Stack Breakdown
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│  Next.js 15 frontend (Vercel)                               │
-│  - JWT Auth stored in cookies                               │
-│  - Zustand store for assignment creation state              │
-│  - html2pdf.js for client-side desktop-caliber PDF export   │
-│  - WebSocket client for live job progress notifications     │
-└────────────────────────┬────────────────────────────────────┘
-                         │ HTTP REST API + WebSocket
-┌────────────────────────▼────────────────────────────────────┐
-│  Express backend (Render)                                   │
-│  - Custom JWT Auth + express-rate-limit                     │
-│  - BullMQ worker — AI paper generation jobs                 │
-│  - WebSocket server — streams job progress to browser       │
-│  - Multer — handles uploaded reference files/images         │
-│  - Zod — runtime validation for incoming requests           │
-└────────┬────────────────────────────┬───────────────────────┘
-         │                            │
-   MongoDB Atlas                  Redis (Upstash)
-   (documents)                    (BullMQ queue)
-         │
-   Google Gemini 2.5 Flash
-   (paper generation)
-```
-
-## Why each technology
-
-| Tool | Role | Why not something simpler |
+| Technology | Role | Why this choice? |
 |---|---|---|
 | **Zod** | Validation | Single source of truth for runtime validation on API endpoints, preventing malformed data from reaching the database. |
-| **BullMQ + Redis** | Job queue | AI calls to Gemini can take 5–15 seconds. Pushing them to a background queue prevents HTTP timeouts, frees up the main Node thread, and allows the frontend to poll/stream progress reliably. |
-| **WebSocket** | Real-time | Pushes `job:progress`, `job:completed`, and `job:failed` events directly to the browser tab that submitted the job, so the loading screen updates dynamically. |
-| **Zustand** | Client state | Holds the complex multi-step assignment form data in memory (Question counts, types, time allowance). |
+| **BullMQ + Redis** | Job Queue | AI calls to Gemini can take 5–15 seconds. Pushing them to a background queue prevents HTTP timeouts, frees up the main Node thread, and allows the frontend to poll/stream progress reliably. |
+| **WebSocket** | Real-Time Comm | Pushes `job:progress`, `job:completed`, and `job:failed` events directly to the browser tab that submitted the job, so the loading screen updates dynamically. |
+| **Zustand** | Client State | Holds the complex multi-step assignment form data in memory (Question counts, types, time allowance). |
 | **html2pdf.js** | PDF Generation | Allows perfect 1024px desktop-formatted exports directly from the client, even if the user is on mobile. |
-| **JWT** | Auth | Lightweight, stateless session management, eliminating the need for complex session stores or third-party paid auth providers. |
+| **JWT** | Authentication | Lightweight, stateless session management, eliminating the need for complex session stores or third-party paid auth providers. |
 
 ---
 
-## Data models
-
-### User
-Handles custom authentication for teachers using the platform.
-
-| Field | Type | Notes |
-|---|---|---|
-| `name` | string | Full name of the user |
-| `email` | string | Unique login credential |
-| `password` | string | Hashed with bcryptjs |
-| `role` | "teacher" \| "student" | Default is teacher |
-| `schoolName` | string | Set at onboarding |
-
-### Assignment
-A paper generation job created by a teacher.
-
-| Field | Type | Notes |
-|---|---|---|
-| `userId` | ObjectId | Owner (teacher) |
-| `subject` | string | e.g. "Science" |
-| `topic` | string | e.g. "Photosynthesis" |
-| `className` | string | e.g. "10th Grade" |
-| `dueDate` | Date | When the assignment is due |
-| `questionTypes` | `{type, count, marks}[]` | e.g. `[{type:"MCQ", count:5, marks:2}]` |
-| `status` | "pending" \| "processing" \| "completed" \| "failed" | Updated by the BullMQ worker |
-| `jobId` | string | Maps to BullMQ job |
-| `resultId` | ObjectId? | Set when generation completes |
-
-### Result
-The AI-generated Question Paper linked to an Assignment.
-
-| Field | Type | Notes |
-|---|---|---|
-| `jobId` | string | Unique index mapping to the BullMQ job |
-| `assignmentId` | ObjectId | Links back to the assignment configuration |
-| `userId` | ObjectId | Owner (teacher) |
-| `paper` | Object | The structured JSON output from Gemini AI |
-
-*The `paper` object includes sections, schoolName, totalMarks, generalInstruction, questions (with difficulty tags), and a private answerKey.*
-
----
-
-## User flows
-
-### Teacher flow
-1. **Sign up / Login** → Standard JWT-based authentication.
-2. **Dashboard (`/home`)** → View recent assignments and quick stats.
-3. **Creation Form (`/create`)** → Multi-step form: fill in title, subject, class, and configure specific question types/counts. Can also upload context files/images.
-4. **Processing (`/loading/[jobId]`)** → Live WebSocket progress: *Starting job → Analyzing content → Generating questions → Validating JSON → Saving paper.*
-5. **Output View (`/result/[jobId]`)** → Review the professional exam layout, see dynamic difficulty badges, and view the answer key.
-6. **Export** → Click "Download PDF" to get a perfectly formatted A4 paper.
-
----
-
-## API Routes & Middleware
-
-**Middleware Chain**: Most routes are protected by the `authenticate` middleware, which verifies the JWT token in the `Authorization` header.
-
-| Method | Path | Purpose |
-|---|---|---|
-| `POST` | `/api/auth/register` | Register a new user |
-| `POST` | `/api/auth/login` | Login and receive a JWT token |
-| `GET` | `/api/auth/me` | Fetch current user details |
-| `POST` | `/api/assignments` | Create an assignment → Enqueues BullMQ job |
-| `GET` | `/api/assignments` | List all assignments for the authenticated user |
-| `GET` | `/api/assignments/:id` | Get specific assignment details |
-| `GET` | `/api/results/job/:jobId` | Fetch the AI-generated paper once completed |
-
----
-
-## Paper generation pipeline
-
-1. Teacher submits form → `POST /api/assignments` validates payload with Zod.
-2. BullMQ job `generate-paper` is enqueued, and the HTTP request returns the `jobId`.
-3. Worker picks up job:
-   - **Analyzing** — reads uploaded files/images if any.
-   - **Generating** — calls Google Gemini 2.5 Flash with strict JSON-schema prompt and deterministic instructions.
-   - **Validating** — automatically categories questions into logical Sections (A, B) and assigns Difficulties (Easy, Moderate, Hard).
-   - **Saving** — writes the `Result` document to MongoDB Atlas and updates `Assignment.status = "completed"`.
-4. The WebSocket server simultaneously emits `job:progress` and `job:completed` directly to the frontend.
-5. Browser auto-redirects from `/loading/[jobId]` to `/result/[jobId]`.
-
----
-
-## Deployment
-
-| Service | Platform | Notes |
-|---|---|---|
-| Frontend | Vercel | Root: `frontend/`, Framework: Next.js 15 |
-| Backend | Render | Root: `backend/`, starts via `node dist/index.js` |
-| Database | MongoDB Atlas | Free tier |
-| Queue / Cache | Upstash Redis | Free tier, used for BullMQ and aggressive caching |
+<div align="center">
+  <p><b>Built with <img src="https://unpkg.com/lucide-static@0.320.0/icons/heart.svg" width="16" height="16" align="top" /> for Educators.</b></p>
+</div>
