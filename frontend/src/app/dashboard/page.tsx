@@ -137,43 +137,49 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D84315] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
-            <div className="relative z-10">
-              <div className="flex justify-between items-center mb-6">
-                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Total Assignments</p>
-                <div className="w-10 h-10 rounded-xl bg-[#FFF4F1] flex items-center justify-center border border-[#FFE0D6] group-hover:scale-110 transition-transform duration-300">
-                  <FileText size={18} color="#D84315" strokeWidth={2.5} />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+          <div className="col-span-1 group relative overflow-hidden bg-white/80 backdrop-blur-[24px] rounded-[16px] md:rounded-[20px] p-4 md:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-white cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D84315] opacity-[0.04] blur-2xl rounded-full group-hover:opacity-[0.08] transition-opacity duration-500" />
+            <div className="relative z-10 flex flex-col justify-between h-full gap-3 md:gap-4">
+              <div className="flex justify-between items-start">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#FFF4F1] flex items-center justify-center border border-[#FFE0D6] group-hover:scale-105 transition-transform duration-300 shadow-sm">
+                  <FileText className="w-4 h-4 md:w-[18px] md:h-[18px] text-[#D84315]" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{totalAssignments}</h2>
+              <div>
+                <h2 className="font-heading text-[28px] md:text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight mb-1">{totalAssignments}</h2>
+                <p className="font-inter text-[12px] md:text-[13px] font-medium text-[#737373] leading-tight">Total Assignments</p>
+              </div>
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0EA5E9] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
-            <div className="relative z-10">
-              <div className="flex justify-between items-center mb-6">
-                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Classes Managed</p>
-                <div className="w-10 h-10 rounded-xl bg-[#F0F9FF] flex items-center justify-center border border-[#E0F2FE] group-hover:scale-110 transition-transform duration-300">
-                  <Users size={18} color="#0EA5E9" strokeWidth={2.5} />
+          <div className="col-span-1 group relative overflow-hidden bg-white/80 backdrop-blur-[24px] rounded-[16px] md:rounded-[20px] p-4 md:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-white cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#0EA5E9] opacity-[0.04] blur-2xl rounded-full group-hover:opacity-[0.08] transition-opacity duration-500" />
+            <div className="relative z-10 flex flex-col justify-between h-full gap-3 md:gap-4">
+              <div className="flex justify-between items-start">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#F0F9FF] flex items-center justify-center border border-[#E0F2FE] group-hover:scale-105 transition-transform duration-300 shadow-sm">
+                  <Users className="w-4 h-4 md:w-[18px] md:h-[18px] text-[#0EA5E9]" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{uniqueClasses}</h2>
+              <div>
+                <h2 className="font-heading text-[28px] md:text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight mb-1">{uniqueClasses}</h2>
+                <p className="font-inter text-[12px] md:text-[13px] font-medium text-[#737373] leading-tight">Classes Managed</p>
+              </div>
             </div>
           </div>
           
-          <div className="group relative overflow-hidden bg-white/60 backdrop-blur-[24px] rounded-[16px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-white/80 cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#EF4444] opacity-[0.03] blur-2xl rounded-full group-hover:opacity-[0.06] transition-opacity duration-500" />
-            <div className="relative z-10">
-              <div className="flex justify-between items-center mb-6">
-                <p className="font-inter text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF]">Upcoming Deadlines</p>
-                <div className="w-10 h-10 rounded-xl bg-[#FEF2F2] flex items-center justify-center border border-[#FEE2E2] group-hover:scale-110 transition-transform duration-300">
-                  <Calendar size={18} color="#EF4444" strokeWidth={2.5} />
+          <div className="col-span-2 md:col-span-1 group relative overflow-hidden bg-white/80 backdrop-blur-[24px] rounded-[16px] md:rounded-[20px] p-4 md:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-white cursor-default transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#EF4444] opacity-[0.04] blur-2xl rounded-full group-hover:opacity-[0.08] transition-opacity duration-500" />
+            <div className="relative z-10 flex flex-col md:flex-col justify-between h-full gap-3 md:gap-4">
+              <div className="flex justify-between items-start">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#FEF2F2] flex items-center justify-center border border-[#FEE2E2] group-hover:scale-105 transition-transform duration-300 shadow-sm">
+                  <Calendar className="w-4 h-4 md:w-[18px] md:h-[18px] text-[#EF4444]" strokeWidth={2.5} />
                 </div>
               </div>
-              <h2 className="font-heading text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight">{upcomingDeadlines}</h2>
+              <div>
+                <h2 className="font-heading text-[28px] md:text-[42px] font-extrabold text-[#352B25] leading-none tracking-tight mb-1">{upcomingDeadlines}</h2>
+                <p className="font-inter text-[12px] md:text-[13px] font-medium text-[#737373] leading-tight">Upcoming Deadlines</p>
+              </div>
             </div>
           </div>
         </div>
