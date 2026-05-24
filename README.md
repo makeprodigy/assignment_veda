@@ -28,6 +28,20 @@
 
 <hr />
 
+## <img src="https://api.iconify.design/lucide:list.svg?color=white" width="24" height="24" align="top" /> Table of Contents
+
+- [Key Features](#key-features)
+- [UI Showcase](#ui-showcase)
+- [High-Level Design (HLD)](#high-level-design-hld)
+- [Low-Level Design (LLD)](#low-level-design-lld)
+- [Database Schema (ERD)](#database-schema-erd)
+- [System Flow Diagram](#system-flow-diagram)
+- [Local Setup & Installation](#local-setup--installation)
+- [API Reference](#api-reference)
+- [Technology Stack Breakdown](#technology-stack-breakdown)
+
+---
+
 ## <img src="https://api.iconify.design/lucide:sparkles.svg?color=white" width="24" height="24" align="top" /> Key Features
 
 - <img src="https://api.iconify.design/lucide:brain.svg?color=white" width="18" height="18" align="top" /> **AI-Driven Generation:** Leverages Google Gemini 2.5 Flash to create contextual, accurate, and diverse questions.
@@ -264,6 +278,24 @@ sequenceDiagram
 - **Redis**: An Upstash Redis database (or local instance)
 - **Google Gemini API Key**: From Google AI Studio
 
+### Environment Variables
+
+You will need to create a `.env` file in the `backend` and `.env.local` in the `frontend`. Here is the dictionary of required variables:
+
+**Backend (`backend/.env`)**
+| Variable | Description | Where to get it |
+|---|---|---|
+| `MONGODB_URI` | Connection string for MongoDB | [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) |
+| `REDIS_URL` | Connection string for Upstash Redis | [Upstash Console](https://console.upstash.com/) |
+| `GEMINI_API_KEY` | API key for Gemini 2.5 Flash | [Google AI Studio](https://aistudio.google.com/) |
+| `JWT_SECRET` | A secure random string for signing JWT tokens | Generate via `openssl rand -hex 32` |
+| `FRONTEND_URL` | URL of the Next.js app for CORS | e.g. `http://localhost:3000` |
+
+**Frontend (`frontend/.env.local`)**
+| Variable | Description | Where to get it |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | The REST API endpoint of your Express backend | e.g. `http://localhost:4000` |
+
 ### Backend Setup
 1. Navigate to the backend directory:
    ```bash
@@ -297,6 +329,22 @@ sequenceDiagram
    npm run dev
    ```
    *The app will run at `http://localhost:3000`.*
+
+---
+
+## <img src="https://api.iconify.design/lucide:globe.svg?color=white" width="24" height="24" align="top" /> API Reference
+
+Below are the main endpoints exposed by the Express backend. All protected routes require a JWT token in the `Authorization: Bearer <token>` header.
+
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|:---:|
+| `POST` | `/api/auth/register` | Create a new teacher account | ❌ |
+| `POST` | `/api/auth/login` | Login and receive a JWT token | ❌ |
+| `GET` | `/api/auth/me` | Fetch details of the currently logged-in user | ✅ |
+| `POST` | `/api/assignments` | Submit an assignment configuration to the BullMQ queue | ✅ |
+| `GET` | `/api/assignments` | Retrieve a list of all assignments created by the user | ✅ |
+| `GET` | `/api/assignments/:id` | Fetch specific metadata about an assignment | ✅ |
+| `GET` | `/api/results/job/:jobId` | Retrieve the generated Question Paper JSON by Job ID | ✅ |
 
 ---
 
