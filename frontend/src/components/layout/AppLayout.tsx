@@ -33,12 +33,12 @@ export default function AppLayout({
         <Sidebar />
       </div>
       <main className="flex flex-col flex-1 h-screen overflow-hidden relative">
-        {showTopBar && (
-          <div className="z-50 shrink-0 m-4 mb-0">
-            <TopBar title={title} backHref={backHref} breadcrumb={breadcrumb} />
-          </div>
-        )}
-        <div className="flex-1 overflow-y-auto px-4 pb-[90px] md:pb-4 pt-4">
+        <div className="flex-1 overflow-y-auto px-4 pb-[90px] md:pb-4">
+          {showTopBar && (
+            <div className="sticky top-4 z-50 mb-4 mt-4">
+              <TopBar title={title} backHref={backHref} breadcrumb={breadcrumb} />
+            </div>
+          )}
           {children}
         </div>
         
